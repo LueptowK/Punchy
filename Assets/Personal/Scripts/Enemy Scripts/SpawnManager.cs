@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour {
 
-    public enum EnemyType : int { Cylinder = 0, Humanoid = 1, SpiderSwarm = 2 };
+    public enum EnemyType : int { Cylinder = 0, Humanoid = 1, SpiderSwarm = 2, CowardlyWizard = 3 };
     [SerializeField] GameObject[] enemyPrefabs;
     [SerializeField] DifficultyManager difficultyManager;
     List<GameObject>[] enemies = new List<GameObject>[System.Enum.GetValues(typeof(EnemyType)).Length];
