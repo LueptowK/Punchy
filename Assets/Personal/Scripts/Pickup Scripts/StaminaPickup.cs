@@ -10,7 +10,7 @@ public class StaminaPickup : PickupController
     private void OnTriggerEnter(Collider col)
     {
         col.gameObject.GetComponent<PlayerStamina>().RegainStaminaWithoutRegen(StaminaAmount);
-        col.gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
+       // col.gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
     }
 
 }

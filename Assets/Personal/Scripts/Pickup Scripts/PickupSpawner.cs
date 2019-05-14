@@ -106,7 +106,7 @@ public class PickupSpawner : MonoBehaviour
     {
         pickupCount--;
         pickups.Remove(obj);
-        Destroy(obj);
+        //Destroy(obj);
 
         //locations.Remove(obj.transform.position + new Vector3(0, 5/4, 0));
     }

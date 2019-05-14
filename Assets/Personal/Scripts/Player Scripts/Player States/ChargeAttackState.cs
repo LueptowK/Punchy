@@ -49,8 +49,13 @@ public class ChargeAttackState : PlayerState
     }
 
     public override void Enter()
-    {
-        attackTarget.collider.gameObject.GetComponent<EnemyController>().freeze();
+    {	
+		if ( attackTarget.collider.gameObject.tag == "Enemy"){
+			attackTarget.collider.gameObject.GetComponent<EnemyController>().freeze();
+			} /*
+		else if (attackTarget.collider.gameObject.tag == "Pickup" ) {
+		attackTarget.collider.gameObject.GetComponent<PickupController>().freeze();
+		} */
         Vector3 attackTargetPosition = attackTarget.collider.gameObject.transform.position;
         initialPosition = playerMover.transform.position;
         moveTarget = attackTargetPosition - Vector3.Normalize(attackTargetPosition - initialPosition)*endingDistance;
@@ -84,8 +89,13 @@ public class ChargeAttackState : PlayerState
         {
             playerMover.Move(Vector3.zero);
             if (attackTarget.collider != null)
-            {
+            {	
+				if (attackTarget.collider.gameObject.tag == "Enemy") {
                 attackTarget.collider.gameObject.GetComponent<EnemyController>().takeDamage(attackTarget.point);
+				}
+				else if (attackTarget.collider.gameObject.name == "healthpickup" ) {
+				attackTarget.collider.gameObject.GetComponent<HealthPickup>().takeDamage(attackTarget.point);
+				}
             }
             
             attacked = true;

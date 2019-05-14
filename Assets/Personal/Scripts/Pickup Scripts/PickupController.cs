@@ -22,6 +22,16 @@ public abstract class PickupController : MonoBehaviour
         //print(timer);
 
     }  
+	/*
+	 public virtual void takeDamage(Vector3 point)
+    {
+        this.gameObject.GetComponent<PickupSpawner>().PickedUp(this.gameObject);
+    }
+	
+    public virtual void freeze()
+    {
+        nav.enabled = false;
+    } */
 
 
 }

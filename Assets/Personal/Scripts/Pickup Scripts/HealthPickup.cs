@@ -6,10 +6,14 @@ public class HealthPickup : PickupController
 {
     [SerializeField] private int HealthAmount = 50;
 
-
+	/*
     private void OnTriggerEnter(Collider col)
     {
         col.gameObject.GetComponent<PlayerHealth>().GainHealth(HealthAmount);
-        col.gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
+       // col.gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
+    } */
+	 public virtual void takeDamage(Vector3 point)
+    {
+        gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
     }
 }
