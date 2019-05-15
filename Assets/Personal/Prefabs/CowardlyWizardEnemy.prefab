@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3293244435944367796}
   - component: {fileID: 3293244435944367793}
   - component: {fileID: 3293244435944367803}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CowardlyWizardEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,11 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   firingFrequency: 0
   firingFrequencyRange: 0
+  fireWindupTime: 0
+  scoreValue: 0
   energyBallPrefab: {fileID: 0}
+  bulletSpeed: 0
+  energyBallDuration: 0
 --- !u!114 &3293244435944367793
 MonoBehaviour:
   m_ObjectHideFlags: 0

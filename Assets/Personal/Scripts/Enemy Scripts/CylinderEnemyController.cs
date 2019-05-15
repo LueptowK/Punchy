@@ -140,7 +140,6 @@ public class CylinderEnemyController : EnemyController
         fireTimer += Time.fixedDeltaTime;
         if (!firing && fireTimer >= timeToNextFire && CheckLineOfSight())
         {
-            //only called with 0 for now, since only one attack type exists
             if (Vector3.Distance(player.transform.position, gameObject.transform.position) > 20 && Mathf.Abs(player.transform.position.y - transform.position.y) < 0.5f)
             {
                 if (TryAttack(1))
