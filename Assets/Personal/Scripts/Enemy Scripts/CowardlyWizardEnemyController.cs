@@ -15,15 +15,22 @@ public class CowardlyWizardEnemyController : EnemyController
     float defaultSpeed;
     float runAwayDistance;
     Vector3 destination;
-
+    private List<GameObject> energyBalls = new List<GameObject>();
+    EnemyAttackTokenPool.Token token;
     [SerializeField] float firingFrequency;
     [SerializeField] float firingFrequencyRange;
+    [SerializeField] float fireWindupTime;
+    [SerializeField] int scoreValue;
     private float timeToNextFire;
     private float fireTimer;
     bool firing;
     bool dead;
     [SerializeField] private GameObject energyBallPrefab;
     NavMeshHit closestHit;
+    [SerializeField] float bulletSpeed;
+    float bulletForce;
+    [SerializeField] float bulletDamage;
+    [SerializeField] private float energyBallDuration;
 
 
     // Start is called before the first frame update
@@ -40,6 +47,8 @@ public class CowardlyWizardEnemyController : EnemyController
         tetherRadius = tether.GetComponent<TetherController>().Radius;
         dead = false;
         runAwayDistance = 20f;
+        bulletForce = 0f;
+
         //this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 3);
 
         //if (NavMesh.SamplePosition(this.transform.position, out closestHit, 500, 0)) {
@@ -48,13 +57,14 @@ public class CowardlyWizardEnemyController : EnemyController
         //else Debug.LogError("Could not place CowardlyWizardEnemy on the navmesh");
     }
 
-    private void Update()
+    protected override void Update()
     {
-        
+        if (!firing) fireTimer += Time.deltaTime;
+        UpdateEnergyBalls();
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
         if (dead)
         {
@@ -73,14 +83,13 @@ public class CowardlyWizardEnemyController : EnemyController
             {
                 case enemyState.movingState:
                     state = MoveToTether();
-                    //CheckIfFiring();
+                    CheckIfFiring();
                     break;
                 case enemyState.tetheredState:
                     state = TetheredBehavior();
-                    //CheckIfFiring();
+                    CheckIfFiring();
                     break;
             }
-            Debug.Log("state is: " + state);
         }
     }
 
@@ -88,7 +97,8 @@ public class CowardlyWizardEnemyController : EnemyController
     {
         //PROBLEM: tether = this.findBestTether();
         // check if position is in radius of tether
-      
+
+        nav.speed = defaultSpeed * 1.5f; // run faster when trying to get to tether
         if (Vector3.Distance(tether.transform.position, this.transform.position) <= tetherRadius)
         {
             //stateTimer = 0;
@@ -103,6 +113,8 @@ public class CowardlyWizardEnemyController : EnemyController
 
     private enemyState TetheredBehavior()
     {
+        nav.speed = defaultSpeed;
+        //if (fireTimer >= firingFrequency) FireProjectile();
         // if player gets too close re-evaluate or wait the appropriate amount of time to evaluate next tether
         if (playerTooClose) //|| stateTimer >= reevaluateTetherTime)
         {
@@ -129,7 +141,7 @@ public class CowardlyWizardEnemyController : EnemyController
         return tether.transform.position + (Vector3)Random.insideUnitCircle * tetherRadius;
     }
 
-  
+
 
     private bool playerTooClose
     {
@@ -181,31 +193,92 @@ public class CowardlyWizardEnemyController : EnemyController
         return tethers[minWeightIndex].gameObject;
     }
 
-    //private bool TryAttack(int attackType)
-    //{
-    //    token = enemyAttackTokenPool.RequestToken(this.gameObject, attackType);
-    //    return (token != null);
-    //}
+    private void CheckIfFiring()
+    {
+        fireTimer += Time.fixedDeltaTime;
+        if (!firing && fireTimer >= timeToNextFire && CheckLineOfSight())
+        { 
+            if (TryAttack(0)) // only one kind of attack
+            {
+                firing = true;
+                fireTimer = 0;
+            }
+        }
 
-    //private void EndAttack()
-    //{
-    //    enemyAttackTokenPool.ReturnToken(this.type, token);
-    //    token = null;
-    //    firing = false;
-    //    timeToNextFire = firingFrequency + Random.Range(-firingFrequencyRange, firingFrequencyRange);
-    //    fireTimer = 0;
-    //}
+        if (firing)
+        {
+            //stopgap to prevent firing into walls - cylinder will hold token indefinitely if it can never see player
+            if (fireTimer >= fireWindupTime && CheckLineOfSight())
+            {
+                //audioSource.PlayOneShot(firingSound, 0.8f);
+                FireProjectile();
+            }
+        }
+    }
 
-    //private void FireProjectile()
-    //{
-    //    transform.LookAt(player.gameObject.transform.position);
-    //    GameObject energyBall = Instantiate(energyBallPrefab, this.transform.position, this.transform.rotation);
-    //    //bullet.GetComponent<Projectile>().Fire(this.transform.position, player.transform.position, bulletSpeed, bulletDamage, bulletForce);
-    //    // creating the energyBall will be different than bullet probably
-    //    EndAttack();
-    //}
+    private bool TryAttack(int attackType)
+    {
+        token = enemyAttackTokenPool.RequestToken(this.gameObject, attackType);
+        return (token != null);
+    }
+
+    private void EndAttack()
+    {
+        //enemyAttackTokenPool.ReturnToken(this.type, token);
+        token = null;
+        firing = false;
+        timeToNextFire = firingFrequency + Random.Range(-firingFrequencyRange, firingFrequencyRange);
+        fireTimer = 0;
+    }
+
+    private void FireProjectile()
+    {
+        fireTimer = 0;
+        transform.LookAt(player.gameObject.transform.position);
+        GameObject energyBall = Instantiate(energyBallPrefab, this.transform.position, this.transform.rotation);
+        energyBall.GetComponent<EnergyBallProjectileController>().Fire(this.transform.position, player.transform.position, bulletSpeed, bulletDamage, bulletForce, token, enemyAttackTokenPool);
+        energyBalls.Add(energyBall);
+        EndAttack();
+
+    }
+
+    private void UpdateEnergyBalls()
+    {
+        EnergyBallProjectileController projectileController;
+        if (energyBalls.Count == 0) return;
+        foreach (GameObject ball in energyBalls)
+        {
+            projectileController = ball.GetComponent<EnergyBallProjectileController>();
+            if (projectileController.timer > energyBallDuration)
+            {
+                Destroy(ball);
+            }
+            projectileController.UpdateTrajectory(player.transform.position);
+
+        }
+    }
+
+    public override void takeDamage(Vector3 point)
+    {
+        Die();
+    }
+
+    private void Die()
+    {
+        playerCamera.gameObject.GetComponent<ScoreTracker>().ChangeScore(scoreValue, transform.position);
+
+        foreach (GameObject ball in energyBalls)
+        {
+            ball.GetComponent<EnergyBallProjectileController>().Die();
+        }
+        Destroy(this.gameObject);
+        //DestroyThis();
+    }
 
 
     // might want to consider refactoring CylinderEnemyController and CowardlyWizardEnemyController into a parent class
     // since I'm duplicating a lot of the cylinder behavior
+
+
+    // currently, tokens aren't working. Enemy is firing too often and too many balls are on the field at once
 }
