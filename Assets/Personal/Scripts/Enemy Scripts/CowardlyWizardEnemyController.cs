@@ -23,6 +23,8 @@ public class CowardlyWizardEnemyController : EnemyController
     [SerializeField] int scoreValue;
     private float timeToNextFire;
     private float fireTimer;
+    private float stateTimer;
+    private float reevaluateTetherTime;
     bool firing;
     bool dead;
     [SerializeField] private GameObject energyBallPrefab;
@@ -48,6 +50,8 @@ public class CowardlyWizardEnemyController : EnemyController
         dead = false;
         runAwayDistance = 20f;
         bulletForce = 0f;
+        stateTimer = 0f;
+        reevaluateTetherTime = 2f;
 
         //this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 3);
 
@@ -68,17 +72,12 @@ public class CowardlyWizardEnemyController : EnemyController
     {
         if (dead)
         {
-            //stateTimer += Time.unscaledDeltaTime;
-            //if (stateTimer >= maxDeadTime)
-            //{
-            //    Destroy(this.gameObject);
-            //}
+            // handled by TakeDamage and Die()
         }
 
         if (!dead && nav.enabled)
         {
-            //nav.SetDestination(player.transform.position);
-            //stateTimer += Time.unscaledDeltaTime;
+            stateTimer += Time.unscaledDeltaTime;
             switch (state)
             {
                 case enemyState.movingState:
@@ -101,7 +100,7 @@ public class CowardlyWizardEnemyController : EnemyController
         nav.speed = defaultSpeed * 1.5f; // run faster when trying to get to tether
         if (Vector3.Distance(tether.transform.position, this.transform.position) <= tetherRadius)
         {
-            //stateTimer = 0;
+            stateTimer = 0;
             return enemyState.tetheredState;
         }
         else
@@ -116,7 +115,7 @@ public class CowardlyWizardEnemyController : EnemyController
         nav.speed = defaultSpeed;
         //if (fireTimer >= firingFrequency) FireProjectile();
         // if player gets too close re-evaluate or wait the appropriate amount of time to evaluate next tether
-        if (playerTooClose) //|| stateTimer >= reevaluateTetherTime)
+        if (playerTooClose || stateTimer >= reevaluateTetherTime)
         {
             GameObject newTether = this.findBestTether();
             if (newTether == tether)
@@ -168,7 +167,11 @@ public class CowardlyWizardEnemyController : EnemyController
         {
             weights[i] += 10 * tethers[i].Occupants ^ 2;
             //weight distance from tether to AI as distance/4
-            weights[i] += (int)(Vector3.Distance(tethers[i].gameObject.transform.position, gameObject.transform.position) / 4);
+            int distanceToTether = (int)(Vector3.Distance(tethers[i].gameObject.transform.position, gameObject.transform.position) / 4);
+            weights[i] += distanceToTether;
+
+            //weight distance between tether and player as (1/distance)*100 cast as int, so if distance = 50, adds 2. if distance = 5, adds 20
+            //weights[i] += (int)(1/Vector3.Distance(tethers[i].gameObject.transform.position, player.transform.position));
 
             //We want distance from tether to player to be 60, so weight the difference of actual distance from that by difference*2
             weights[i] += (int)(Mathf.Abs(
@@ -179,8 +182,13 @@ public class CowardlyWizardEnemyController : EnemyController
 
             if (weights[i] < minWeight)
             {
-                minWeightIndex = i;
-                minWeight = weights[i];
+                // only pick this tether if player isn't closer to tether than I am
+                if (distanceToTether < Vector3.Distance(tethers[i].gameObject.transform.position, player.transform.position)) 
+                { 
+                    minWeightIndex = i;
+                    minWeight = weights[i];
+                }
+               
             }
         }
 
@@ -218,6 +226,10 @@ public class CowardlyWizardEnemyController : EnemyController
 
     private bool TryAttack(int attackType)
     {
+        if (Vector3.Distance(this.transform.position, player.transform.position) < 10f) 
+        {
+            return false; // don't fire when right next to player
+        }
         token = enemyAttackTokenPool.RequestToken(this.gameObject, attackType);
         return (token != null);
     }
@@ -285,6 +297,6 @@ public class CowardlyWizardEnemyController : EnemyController
     // might want to consider refactoring CylinderEnemyController and CowardlyWizardEnemyController into a parent class
     // since I'm duplicating a lot of the cylinder behavior
 
-
-    // currently, tokens aren't working. Enemy is firing too often and too many balls are on the field at once
+    // should make it unable to spawn projectile if too close to player
+    // should never choose a tether past the player
 }

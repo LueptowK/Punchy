@@ -2329,7 +2329,7 @@ PrefabInstance:
     - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
         type: 3}
       propertyPath: energyBallDuration
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
         type: 3}
