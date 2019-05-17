@@ -8,7 +8,7 @@ public class EnergyBallProjectileController : MonoBehaviour
     private float speed;
     private Rigidbody rb;
     private int Duration = 60; //1 minute
-    public float timer;  // give this a Get 
+    private float timer;  // give this a Get 
     private float force;
     [SerializeField] private float gravity;
     EnemyAttackTokenPool.Token token;
@@ -28,7 +28,6 @@ public class EnergyBallProjectileController : MonoBehaviour
     {
         timer = 0;
         playerInRange = false;
-        print("start");
         StartCoroutine(DamageOverTime());
     }
 
@@ -135,5 +134,13 @@ public class EnergyBallProjectileController : MonoBehaviour
             yield return new WaitForSeconds(2);
         }
        
+    }
+
+    public float Timer
+    {
+        get
+        {
+            return timer;
+        }
     }
 }

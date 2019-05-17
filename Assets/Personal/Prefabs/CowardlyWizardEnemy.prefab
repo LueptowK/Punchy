@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3293244435944367798}
   - component: {fileID: 3293244435944367797}
   - component: {fileID: 3293244435944367796}
-  - component: {fileID: 3293244435944367793}
   - component: {fileID: 3293244435944367803}
   m_Layer: 9
   m_Name: CowardlyWizardEnemy
@@ -101,7 +100,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3293244435944367802}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abfe256061bcd714883eb1c9dbe5524f, type: 3}
   m_Name: 
@@ -117,47 +116,8 @@ MonoBehaviour:
   scoreValue: 0
   energyBallPrefab: {fileID: 0}
   bulletSpeed: 0
-  energyBallDuration: 0
---- !u!114 &3293244435944367793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3293244435944367802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e2d072e434d30459d5ab706366eddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyAttackTokenPool: {fileID: 0}
-  player: {fileID: 0}
-  nav: {fileID: 3293244435944367803}
-  spawnManager: {fileID: 0}
-  playerCamera: {fileID: 0}
-  bulletPrefab: {fileID: 0}
-  firingFrequency: 0
-  firingFrequencyRange: 0
-  bulletSpeed: 0
   bulletDamage: 0
-  runAwayDistance: 0
-  fractures: {fileID: 0}
-  scoreValue: 0
-  bulletForce: 0
-  explosion: {fileID: 0}
-  fireWindupTime: 0
-  reevaluateTetherTime: 0
-  firingSound: {fileID: 0}
-  laserSound: {fileID: 0}
-  laserRotationLerp: 0
-  targetLine: {fileID: 0}
-  laserLine: {fileID: 0}
-  laserMaxLength: 0
-  laserForce: 0
-  laserDamagePerFrame: 0
-  laserWindupTime: 0
-  laserFiringTime: 0
-  laserTargetingTime: 0
+  energyBallDuration: 0
 --- !u!195 &3293244435944367803
 NavMeshAgent:
   m_ObjectHideFlags: 0

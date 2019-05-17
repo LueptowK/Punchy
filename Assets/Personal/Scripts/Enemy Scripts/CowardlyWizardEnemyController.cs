@@ -236,8 +236,8 @@ public class CowardlyWizardEnemyController : EnemyController
         fireTimer = 0;
         transform.LookAt(player.gameObject.transform.position);
         GameObject energyBall = Instantiate(energyBallPrefab, this.transform.position, this.transform.rotation);
-        energyBall.GetComponent<EnergyBallProjectileController>().Fire(this.transform.position, player.transform.position, bulletSpeed, bulletDamage, bulletForce, token, enemyAttackTokenPool);
         energyBalls.Add(energyBall);
+        energyBall.GetComponent<EnergyBallProjectileController>().Fire(this.transform.position, player.transform.position, bulletSpeed, bulletDamage, bulletForce, token, enemyAttackTokenPool);
         EndAttack();
 
     }
@@ -248,10 +248,16 @@ public class CowardlyWizardEnemyController : EnemyController
         if (energyBalls.Count == 0) return;
         foreach (GameObject ball in energyBalls)
         {
-            projectileController = ball.GetComponent<EnergyBallProjectileController>();
-            if (projectileController.timer > energyBallDuration)
+            if (ball == null)
             {
-                Destroy(ball);
+                Debug.LogError("Energy Ball has been destroyed or has otherwise become null, but not removed from energyBalls list");
+            }
+            projectileController = ball.GetComponent<EnergyBallProjectileController>();
+            if (projectileController.Timer > energyBallDuration)
+            {
+                projectileController.Die();
+                energyBalls.Remove(ball); // might not be necessary?
+                return;
             }
             projectileController.UpdateTrajectory(player.transform.position);
 
@@ -271,8 +277,8 @@ public class CowardlyWizardEnemyController : EnemyController
         {
             ball.GetComponent<EnergyBallProjectileController>().Die();
         }
-        Destroy(this.gameObject);
-        //DestroyThis();
+        //Destroy(this.gameObject);
+        DestroyThis(); // Tells the spawnmanager to delete
     }
 
 

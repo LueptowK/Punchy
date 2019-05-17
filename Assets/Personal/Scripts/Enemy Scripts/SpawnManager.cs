@@ -13,10 +13,10 @@ public class SpawnManager : MonoBehaviour {
     float[] spawnLimitsGrowth;
     int[] spawnLimits; 
     [SerializeField] GameObject enemiesParent;
-    float[] spawnTimers = { 0, 0, 0 };
-    float[] baseTimesToNextSpawn = {1, 3, 4 };
-    float[] spawnTimeRanges = {0.5f/2, 2/2, 2/2};
-    float[] timesOfNextSpawn = {0, 0, 0}; 
+    float[] spawnTimers = { 0, 0, 0, 0 };
+    float[] baseTimesToNextSpawn = {1, 3, 4, 4 };
+    float[] spawnTimeRanges = {0.5f/2, 2/2, 2/2, 2/2 };
+    float[] timesOfNextSpawn = {0, 0, 0, 0}; 
     GameObject player;
     TethersTracker tethersTracker;
     DifficultyValues difficultyValues;
