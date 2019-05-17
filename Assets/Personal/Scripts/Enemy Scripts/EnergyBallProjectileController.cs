@@ -5,12 +5,11 @@ using UnityEngine;
 public class EnergyBallProjectileController : MonoBehaviour
 {
     private float damage;
+    [SerializeField] private int immediateDamage;
     private float speed;
     private Rigidbody rb;
-    private int Duration = 60; //1 minute
     private float timer;  // give this a Get 
     private float force;
-    [SerializeField] private float gravity;
     EnemyAttackTokenPool.Token token;
     EnemyAttackTokenPool tokenPool;
     bool playerInRange;
@@ -70,10 +69,21 @@ public class EnergyBallProjectileController : MonoBehaviour
     //        if (other.gameObject.tag == "Player")
     //        {
     //            Debug.Log("collision with player");
-                    // could have enemy do extra damage if it physically touches player
+    // could have enemy do extra damage if it physically touches player
     //        }
     //    }
     //}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag != "Enemy" && other.gameObject.tag != "Hitbox")
+        {
+            if (other.gameObject.tag == "Player")
+            {
+                other.gameObject.GetComponent<PlayerHealth>().TakeDamage(immediateDamage, rb.velocity.normalized, force);
+            }
+        }
+    }
 
     // trigger is collider with larger radius that controls damage
     void OnTriggerStay(Collider other)
@@ -107,9 +117,9 @@ public class EnergyBallProjectileController : MonoBehaviour
     {
         Vector3 unitDirection = (playerPosition - this.transform.position).normalized;
         Vector3 velocityWithoutArc = unitDirection * speed;
-        float distance = Vector3.Distance(this.transform.position, playerPosition);
-        float timeToPlayer = distance / speed;
-        float initialYVelocity = gravity * timeToPlayer / 2f;
+        //float distance = Vector3.Distance(this.transform.position, playerPosition);
+        //float timeToPlayer = distance / speed;
+        //float initialYVelocity = gravity * timeToPlayer / 2f;
         //Vector3 desiredVelocity = new Vector3(velocityWithoutArc.x, velocityWithoutArc.y + initialYVelocity, velocityWithoutArc.z);
         rb.velocity = velocityWithoutArc;
     }
