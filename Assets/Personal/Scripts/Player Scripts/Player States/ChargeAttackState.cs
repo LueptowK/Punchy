@@ -93,7 +93,8 @@ public class ChargeAttackState : PlayerState
 				if (attackTarget.collider.gameObject.tag == "Enemy") {
                 attackTarget.collider.gameObject.GetComponent<EnemyController>().takeDamage(attackTarget.point);
 				}
-				else if (attackTarget.collider.gameObject.name == "healthpickup" ) {
+				else if (attackTarget.collider.gameObject.tag == "Pickup" ) {
+				Debug.Log("test");
 				attackTarget.collider.gameObject.GetComponent<HealthPickup>().takeDamage(attackTarget.point);
 				}
             }

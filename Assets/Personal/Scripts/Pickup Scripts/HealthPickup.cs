@@ -14,6 +14,8 @@ public class HealthPickup : PickupController
     } */
 	 public virtual void takeDamage(Vector3 point)
     {
+		
         gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
+		Destroy(gameObject);
     }
 }
