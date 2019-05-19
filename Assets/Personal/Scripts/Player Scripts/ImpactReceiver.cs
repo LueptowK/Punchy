@@ -53,8 +53,6 @@ public class ImpactReceiver : MonoBehaviour {
     {
         if (!frozen)
         {
-            Debug.Log(impact, character.gameObject);
-
             // apply the impact force:
             if ((impact.magnitude > recoveryImpact) || character.isGrounded)
             {
