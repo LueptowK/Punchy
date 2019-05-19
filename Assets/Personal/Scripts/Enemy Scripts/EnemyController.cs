@@ -35,6 +35,7 @@ public abstract class EnemyController : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+
     }
 
     protected virtual void FixedUpdate()

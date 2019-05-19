@@ -81,7 +81,7 @@ public class GroundPoundState : PlayerState
             float damageRange = (speed - 20)/3;
             float physicsRange = (speed - 20)/2;
             DealPoundDamage(damageRange);
-            DealPoundImpacts(physicsRange);
+            //DealPoundImpacts(physicsRange);
             DealPoundPhysics(physicsRange);
             groundPoundParticles.Play();
             audioSource.PlayOneShot(groundPoundSound);
@@ -108,12 +108,13 @@ public class GroundPoundState : PlayerState
         Collider[] colliders = Physics.OverlapSphere(playerMover.transform.position, range, enemyMask);
         foreach (Collider hit in colliders)
         {
-            if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-            {
-                Vector3 direction = playerMover.transform.position - (hit.gameObject.transform.position + Vector3.down * height / 2);
-                //Dividing the direction once gives the unit vector, again reduces the force inversely with distance
-                hit.gameObject.GetComponent<EnemyController>().takeDamage(direction/direction.magnitude/direction.magnitude);
-            }
+            //hit.gameObject.GetComponent<EnemyController>().takeDamage(hit.gameObject.transform.position);
+
+            
+            Vector3 direction = playerMover.transform.position - (hit.gameObject.transform.position + Vector3.down * height / 2);
+            //Dividing the direction once gives the unit vector, again reduces the force inversely with distance
+            hit.gameObject.GetComponent<EnemyController>().takeDamage(direction);
+            
         }
     }
 
