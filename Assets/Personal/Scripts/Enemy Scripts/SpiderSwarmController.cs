@@ -65,6 +65,11 @@ public class SpiderSwarmController : EnemyController
         }
     }
 
+    protected override void FixedUpdate()
+    {
+        
+    }
+
     // Update is called once per frame
     protected override void Update()
     {
