@@ -26,6 +26,12 @@ public class SpiderController : EnemyController
     protected override void Start()
     {
         velocity = transform.forward * maxSpeed;
+        enemyMover = gameObject.GetComponent<CharacterController>();
+    }
+
+    protected override void FixedUpdate()
+    {
+
     }
 
     // Update is called once per frame
