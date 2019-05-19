@@ -349,6 +349,7 @@ public class CylinderEnemyController : EnemyController
         base.takeDamage(direction);
         defaultColor = Color.gray;
         material.color = defaultColor;
+        playerCamera.gameObject.GetComponent<ScoreTracker>().RegisterHit();
     }
     public override void Die()
     {
