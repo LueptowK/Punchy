@@ -7107,6 +7107,66 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 297547910}
+    - target: {fileID: 901645515709907096, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645515714833398, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645515942995636, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645515915964492, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645516373402107, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645516310364704, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645516641775003, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645516586171342, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645516534243953, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645515079730709, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645515267285416, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645515195102411, guid: 8291fd7f9c09a154f924fc4f3d33caec,
+        type: 3}
+      propertyPath: impactValues.recoveryImpact
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8291fd7f9c09a154f924fc4f3d33caec, type: 3}
 --- !u!1 &657004181
@@ -15302,6 +15362,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: impactValues.groundFriction
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: impactValues.airFriction
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: impactValues.recoveryImpact
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1851941712340838, guid: c8fdea685493baf4eb6547fc19d330ca, type: 3}
       propertyPath: m_Name
       value: cylinderPrefab
@@ -15393,18 +15465,6 @@ PrefabInstance:
         type: 3}
       propertyPath: recoverySpeed
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: impactValues.groundFriction
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: impactValues.airFriction
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: impactValues.recoveryImpact
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 23708129213229988, guid: c8fdea685493baf4eb6547fc19d330ca,
         type: 3}
