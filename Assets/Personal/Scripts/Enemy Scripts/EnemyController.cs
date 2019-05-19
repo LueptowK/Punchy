@@ -84,7 +84,10 @@ public abstract class EnemyController : MonoBehaviour
 
     public virtual void UnfreezeImpacts()
     {
-        impacter.Unfreeze();
+        if (impacter != null)
+        {
+            impacter.Unfreeze();
+        }
     }
 
     public SpawnManager.EnemyType Type
