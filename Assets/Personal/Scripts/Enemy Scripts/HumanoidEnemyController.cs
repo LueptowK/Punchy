@@ -144,7 +144,7 @@ public class HumanoidEnemyController : EnemyController {
         }
     }
 
-    public override void freeze()
+    public override void Freeze()
     {
         nav.enabled = false;
         frozen = true;

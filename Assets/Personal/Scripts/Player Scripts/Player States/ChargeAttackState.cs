@@ -52,7 +52,7 @@ public class ChargeAttackState : PlayerState
 
     public override void Enter()
     {
-        attackTarget.collider.gameObject.GetComponent<EnemyController>().freeze();
+        attackTarget.collider.gameObject.GetComponent<EnemyController>().Freeze();
         Vector3 attackTargetPosition = attackTarget.collider.gameObject.transform.position;
         initialPosition = playerMover.transform.position;
         moveTarget = attackTargetPosition - Vector3.Normalize(attackTargetPosition - initialPosition)*endingDistance;
@@ -87,8 +87,10 @@ public class ChargeAttackState : PlayerState
             playerMover.Move(Vector3.zero);
             if (attackTarget.collider != null)
             {
+                EnemyController enemy = attackTarget.collider.gameObject.GetComponent<EnemyController>();
                 Vector3 direction = (attackTarget.point - playerMover.transform.position).normalized;
-                attackTarget.collider.gameObject.GetComponent<EnemyController>().takeDamage(direction*punchPower);
+                enemy.UnfreezeImpacts();
+                enemy.takeDamage(direction*punchPower);
             }
             
             attacked = true;

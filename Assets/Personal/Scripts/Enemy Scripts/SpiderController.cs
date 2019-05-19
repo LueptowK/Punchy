@@ -126,13 +126,13 @@ public class SpiderController : EnemyController
         return Physics.OverlapSphere(transform.position, neighborRadius, LayerMask.GetMask("Spiders"));
     }
 
-    public override void freeze()
+    public override void Freeze()
     {
         controller.enabled = false;
         frozen = true;
     }
 
-    void OnControllerColliderHit(ControllerColliderHit collision)
+    protected override void OnControllerColliderHit(ControllerColliderHit collision)
     {
         if (wall == null && collision.collider.gameObject.layer == LayerMask.NameToLayer("Default")) {
             Vector3 surfaceNormal = collision.normal;

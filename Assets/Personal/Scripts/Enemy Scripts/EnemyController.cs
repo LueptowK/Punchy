@@ -76,9 +76,15 @@ public abstract class EnemyController : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public virtual void freeze()
+    public virtual void Freeze()
     {
         nav.enabled = false;
+        impacter.Freeze();
+    }
+
+    public virtual void UnfreezeImpacts()
+    {
+        impacter.Unfreeze();
     }
 
     public SpawnManager.EnemyType Type
