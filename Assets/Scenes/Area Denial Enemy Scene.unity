@@ -2312,50 +2312,9 @@ PrefabInstance:
       objectReference: {fileID: 297547915}
     - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
-        type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 297547910}
-    - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
-        type: 3}
-      propertyPath: energyBallPrefab
-      value: 
-      objectReference: {fileID: 6549469861394236073, guid: 73fc79d91c5460c449cc3ecd871d0876,
-        type: 3}
-    - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
-        type: 3}
-      propertyPath: energyBallDuration
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
-        type: 3}
-      propertyPath: scoreValue
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
-        type: 3}
-      propertyPath: bulletSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
-        type: 3}
-      propertyPath: bulletDamage
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
-        type: 3}
-      propertyPath: firingFrequency
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
-        type: 3}
-      propertyPath: firingFrequencyRange
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3293244435944367793, guid: 7123117918a8f964993be52c6c58a263,
         type: 3}
       propertyPath: m_Enabled
@@ -15703,6 +15662,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5071186735562750649, guid: c8fdea685493baf4eb6547fc19d330ca,
+        type: 3}
+      propertyPath: timeScaleManager
+      value: 
+      objectReference: {fileID: 855993077}
     - target: {fileID: 4406372592076846, guid: c8fdea685493baf4eb6547fc19d330ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -15768,11 +15732,6 @@ PrefabInstance:
       propertyPath: spawnManager
       value: 
       objectReference: {fileID: 297547915}
-    - target: {fileID: 5071186735562750649, guid: c8fdea685493baf4eb6547fc19d330ca,
-        type: 3}
-      propertyPath: timeScaleManager
-      value: 
-      objectReference: {fileID: 855993077}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8fdea685493baf4eb6547fc19d330ca, type: 3}
 --- !u!1 &1470570780 stripped
@@ -20837,11 +20796,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3293244435944367803, guid: 7123117918a8f964993be52c6c58a263,
-        type: 3}
-      propertyPath: m_Speed
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 3293244435944367792, guid: 7123117918a8f964993be52c6c58a263,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20987,6 +20941,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293244435944367803, guid: 7123117918a8f964993be52c6c58a263,
+        type: 3}
+      propertyPath: m_Speed
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3293244435944367793, guid: 7123117918a8f964993be52c6c58a263, type: 3}
