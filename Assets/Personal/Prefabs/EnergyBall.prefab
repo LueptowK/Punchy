@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 793413236}
   - component: {fileID: 793413235}
   - component: {fileID: 793413234}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 2275956131872324303}
   - component: {fileID: 6502664482467443967}
   - component: {fileID: 7588370432640191961}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EnergyBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
