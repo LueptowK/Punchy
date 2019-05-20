@@ -67,12 +67,6 @@ public class SpiderSwarmController : EnemyController
 
     protected override void FixedUpdate()
     {
-        
-    }
-
-    // Update is called once per frame
-    protected override void Update()
-    {
         switch (currentState)
         {
             case (SwarmState.Chase):
@@ -108,6 +102,12 @@ public class SpiderSwarmController : EnemyController
                     break;
                 }
         }
+    }
+
+    // Update is called once per frame
+    protected override void Update()
+    {
+        
     }
 
     public void Scatter()

@@ -10,9 +10,11 @@ public class ImpactReceiver : MonoBehaviour {
     float recoveryImpact;
     Vector3 impact = Vector3.zero;
     CharacterController character;
+    bool frozen;
  
     void Start()
     {
+        frozen = false;
         ActorValues actorValues = GetComponent<ActorValues>();
         mass = actorValues.impactValues.Mass;
         groundFriction = actorValues.impactValues.GroundFriction;
@@ -37,29 +39,43 @@ public class ImpactReceiver : MonoBehaviour {
         impact = impact - 2 * (Vector3.Dot(impact, normal) * normal);
     }
 
+    public void Freeze()
+    {
+        frozen = true;
+    }
+
+    public void Unfreeze()
+    {
+        frozen = false;
+    }
+
     void FixedUpdate()
     {
-        // apply the impact force:
-        if ((impact.magnitude > recoveryImpact) || character.isGrounded)
+        if (!frozen)
         {
-            character.Move(impact * Time.fixedDeltaTime);
-        }
-        else
-        {
-            impact = Vector3.zero;
-        }
+            // apply the impact force:
+            if ((impact.magnitude > recoveryImpact) || character.isGrounded)
+            {
 
-        impact += Physics.gravity * Time.deltaTime;
+                character.Move(impact * Time.fixedDeltaTime);
+            }
+            else
+            {
+                impact = Vector3.zero;
+            }
 
-        if (character.isGrounded)
-        {
-            //Apply ground friction
-            impact = Vector3.Lerp(impact, Vector3.zero, Time.fixedDeltaTime * groundFriction);
-        }
-        else
-        {
-            //Apply air friction
-            impact = Vector3.Lerp(impact, Vector3.zero, Time.fixedDeltaTime * airFriction);
+            impact += Physics.gravity * Time.deltaTime;
+
+            if (character.isGrounded)
+            {
+                //Apply ground friction
+                impact = Vector3.Lerp(impact, Vector3.zero, Time.fixedDeltaTime * groundFriction);
+            }
+            else
+            {
+                //Apply air friction
+                impact = Vector3.Lerp(impact, Vector3.zero, Time.fixedDeltaTime * airFriction);
+            }
         }
     }
 }
