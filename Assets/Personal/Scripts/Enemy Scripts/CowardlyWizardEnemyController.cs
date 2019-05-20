@@ -36,7 +36,7 @@ public class CowardlyWizardEnemyController : EnemyController
 
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         nav = GetComponent<NavMeshAgent>();
         defaultSpeed = nav.speed;
@@ -90,6 +90,11 @@ public class CowardlyWizardEnemyController : EnemyController
                     break;
             }
         }
+    }
+
+    public override void Freeze()
+    {
+
     }
 
     private enemyState MoveToTether()
