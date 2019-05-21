@@ -17,7 +17,7 @@ public abstract class EnemyController : MonoBehaviour
     protected Vector3 old_velocity;
     protected ImpactReceiver impacter;
     protected EnemyValues enemyValues;
-    protected float impactToKill;
+    protected float impactToDamage;
     protected float health;
     protected float knockbackModifier;
 
@@ -27,7 +27,7 @@ public abstract class EnemyController : MonoBehaviour
         enemyMover = gameObject.GetComponent<CharacterController>();
         impacter = gameObject.GetComponent<ImpactReceiver>();
         enemyValues = gameObject.GetComponent<EnemyValues>();
-        impactToKill = enemyValues.generalValues.ImpactToKill;
+        impactToDamage = enemyValues.generalValues.ImpactToDamage;
         health = enemyValues.generalValues.HealthValue;
         knockbackModifier = enemyValues.generalValues.KnockbackModifier;
     }
@@ -121,7 +121,7 @@ public abstract class EnemyController : MonoBehaviour
     protected virtual void OnControllerColliderHit(ControllerColliderHit hit)
     {
         float impact = -Vector3.Dot(hit.normal, old_velocity);
-        if (impact > impactToKill)
+        if (impact > impactToDamage)
         {
             if (hit.gameObject.layer == 9)
             {

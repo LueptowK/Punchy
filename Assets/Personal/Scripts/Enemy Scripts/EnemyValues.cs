@@ -11,11 +11,11 @@ public class EnemyValues : ActorValues
     public class GeneralValues : System.Object
     {
         [SerializeField] private float healthValue;
-        [SerializeField] private float impactToKill;
+        [SerializeField] private float impactToDamage;
         [SerializeField] private float knockbackModifier;
 
         public float HealthValue { get { return healthValue; } }
-        public float ImpactToKill { get { return impactToKill; } }
+        public float ImpactToDamage { get { return impactToDamage; } }
         public float KnockbackModifier {  get { return knockbackModifier; } }
     }
 }
