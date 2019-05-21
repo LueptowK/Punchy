@@ -11,10 +11,13 @@ public class ImpactReceiver : MonoBehaviour {
     Vector3 impact = Vector3.zero;
     CharacterController character;
     bool frozen;
+    bool impactActive;
+    public bool isImpactActive { get { return impactActive; } }
  
     void Start()
     {
         frozen = false;
+        impactActive = false;
         ActorValues actorValues = GetComponent<ActorValues>();
         mass = actorValues.impactValues.Mass;
         groundFriction = actorValues.impactValues.GroundFriction;
@@ -32,6 +35,7 @@ public class ImpactReceiver : MonoBehaviour {
             direction.y = 0; //prevents player from being launched into the air and unable to jump?
         }
         impact += direction.normalized * force / mass;
+        impactActive = true;
     }
 
     public void Reflect(Vector3 normal)
@@ -51,17 +55,15 @@ public class ImpactReceiver : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (!frozen)
+        if (!frozen && impactActive)
         {
-            // apply the impact force:
-            if ((impact.magnitude > recoveryImpact) || character.isGrounded)
-            {
-
-                character.Move(impact * Time.fixedDeltaTime);
-            }
-            else
+            // set impact to zero if below recovery threshold
+            if (impact.magnitude <= recoveryImpact)
             {
                 impact = Vector3.zero;
+                character.Move(impact);
+                impactActive = false;
+                return;
             }
 
             impact += Physics.gravity * Time.deltaTime;
@@ -76,6 +78,7 @@ public class ImpactReceiver : MonoBehaviour {
                 //Apply air friction
                 impact = Vector3.Lerp(impact, Vector3.zero, Time.fixedDeltaTime * airFriction);
             }
+            character.Move(impact * Time.fixedDeltaTime);
         }
     }
 }

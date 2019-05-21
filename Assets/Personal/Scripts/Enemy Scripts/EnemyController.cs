@@ -68,6 +68,7 @@ public abstract class EnemyController : MonoBehaviour
         else
         {
             impacter.AddImpact(direction, knockbackModifier);
+            nav.enabled = false;
         }
     }
 
@@ -110,9 +111,8 @@ public abstract class EnemyController : MonoBehaviour
 
     protected virtual void KnockbackUpdate()
     {
-        if (enemyMover.velocity.magnitude <= 1
-            && enemyMover.velocity.y <= 0
-            && enemyMover.isGrounded)
+        if (!impacter.isImpactActive)
+            //&& enemyMover.isGrounded)
         {
             nav.enabled = true;
         }
