@@ -38,6 +38,8 @@ public class CowardlyWizardEnemyController : EnemyController
     // Start is called before the first frame update
     protected override void Start()
     {
+        base.Start();
+
         nav = GetComponent<NavMeshAgent>();
         defaultSpeed = nav.speed;
         tetherTracker = player.gameObject.GetComponentInChildren<TethersTracker>();
@@ -53,6 +55,7 @@ public class CowardlyWizardEnemyController : EnemyController
         stateTimer = 0f;
         reevaluateTetherTime = 2f;
 
+       
         //this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 3);
 
         //if (NavMesh.SamplePosition(this.transform.position, out closestHit, 500, 0)) {
@@ -90,11 +93,6 @@ public class CowardlyWizardEnemyController : EnemyController
                     break;
             }
         }
-    }
-
-    public override void Freeze()
-    {
-
     }
 
     private enemyState MoveToTether()
