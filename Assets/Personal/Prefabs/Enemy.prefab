@@ -590,5 +590,5 @@ MonoBehaviour:
     recoveryImpact: 1
   generalValues:
     healthValue: 2
-    impactToKill: 10
+    impactToDamage: 10
     knockbackModifier: 20
