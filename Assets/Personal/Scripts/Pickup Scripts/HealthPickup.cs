@@ -12,10 +12,9 @@ public class HealthPickup : PickupController
         col.gameObject.GetComponent<PlayerHealth>().GainHealth(HealthAmount);
        // col.gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
     } */
-	 public virtual void takeDamage(Vector3 point)
+	 public void takeDamage()
     {
-		
-        gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
+        (this.gameObject).GetComponent<PickupSpawner>().PickedUp(gameObject);
 		Destroy(gameObject);
     }
 }
