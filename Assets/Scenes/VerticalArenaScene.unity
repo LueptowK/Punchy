@@ -3076,26 +3076,6 @@ PrefabInstance:
       objectReference: {fileID: 1872307368}
     - target: {fileID: 3606967138850372387, guid: 24702d2c502ac224ca4a638da8a5acdc,
         type: 3}
-      propertyPath: impactValues.groundFriction
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3606967138850372387, guid: 24702d2c502ac224ca4a638da8a5acdc,
-        type: 3}
-      propertyPath: impactValues.airFriction
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3606967138850372387, guid: 24702d2c502ac224ca4a638da8a5acdc,
-        type: 3}
-      propertyPath: impactValues.recoveryImpact
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3606967138850372387, guid: 24702d2c502ac224ca4a638da8a5acdc,
-        type: 3}
-      propertyPath: chargeAttackStateValues.punchPower
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3606967138850372387, guid: 24702d2c502ac224ca4a638da8a5acdc,
-        type: 3}
       propertyPath: healthValues.overshieldBar
       value: 
       objectReference: {fileID: 1969765886}

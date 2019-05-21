@@ -437,6 +437,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 1
+    groundFriction: 5
+    airFriction: 5
+    recoveryImpact: 1
   chargeValues:
     chargeTimeout: 1.5
     timeToCharge: 0.5
@@ -471,6 +474,7 @@ MonoBehaviour:
     staminaRegain: 5
     explodeRadius: 1
     explodePower: 50
+    punchPower: 1
   dashStateValues:
     dashTime: 0.16666667
     dashSpeed: 50
