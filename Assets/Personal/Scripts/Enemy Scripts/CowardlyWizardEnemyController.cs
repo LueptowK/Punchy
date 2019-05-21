@@ -175,25 +175,17 @@ public class CowardlyWizardEnemyController : EnemyController
             int distanceToTether = (int)(Vector3.Distance(tethers[i].gameObject.transform.position, gameObject.transform.position) / 4);
             weights[i] += distanceToTether;
 
-            //weight distance between tether and player as (1/distance)*100 cast as int, so if distance = 50, adds 2. if distance = 5, adds 20
-            //weights[i] += (int)(1/Vector3.Distance(tethers[i].gameObject.transform.position, player.transform.position));
-
             //We want distance from tether to player to be 60, so weight the difference of actual distance from that by difference*2
             weights[i] += (int)(Mathf.Abs(
                 Vector3.Distance(tethers[i].gameObject.transform.position, player.transform.position) - 60)) * 2;
 
-            //Weight inverse of trace ratio at inverseRatio*50. Perfect visibility weights 0, no visibility weights 50;
-            weights[i] += (int)((1 - tethers[i].TraceRatio) * 50);
+            //Weight trace ratio at Ratio*50. Perfect visibility weights 50, no visibility weights 0;
+            weights[i] += (int)((tethers[i].TraceRatio) * 50);
 
             if (weights[i] < minWeight)
             {
-                // only pick this tether if player isn't closer to tether than I am
-                if (distanceToTether < Vector3.Distance(tethers[i].gameObject.transform.position, player.transform.position)) 
-                { 
-                    minWeightIndex = i;
-                    minWeight = weights[i];
-                }
-               
+                minWeightIndex = i;
+                minWeight = weights[i];              
             }
         }
 

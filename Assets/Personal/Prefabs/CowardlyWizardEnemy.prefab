@@ -118,7 +118,7 @@ MonoBehaviour:
     type: 3}
   bulletSpeed: 3
   bulletDamage: 0.05
-  energyBallDuration: 20
+  energyBallDuration: 40
 --- !u!195 &3293244435944367803
 NavMeshAgent:
   m_ObjectHideFlags: 0

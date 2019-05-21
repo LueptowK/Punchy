@@ -19474,6 +19474,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6549469861394236073, guid: 73fc79d91c5460c449cc3ecd871d0876,
         type: 3}
+    - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
+        type: 3}
+      propertyPath: energyBallDuration
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7123117918a8f964993be52c6c58a263, type: 3}
 --- !u!4 &2009725088 stripped
@@ -21061,6 +21066,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
+        type: 3}
+      propertyPath: spawnDifficultyValues.baseSpawnLimits.Array.data[2]
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 137d5cac96d69e04abc091b1bfceeda9, type: 3}
