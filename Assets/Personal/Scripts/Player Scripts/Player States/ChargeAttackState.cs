@@ -17,6 +17,7 @@ public class ChargeAttackState : PlayerState
     private float slowestTimeScale;
     private float slowmoLerpFactor;
     float staminaRegain;
+    float punchPower;
     bool dashing;
     bool attacked;
     TimeScaleManager timeScaleManager;
@@ -39,6 +40,7 @@ public class ChargeAttackState : PlayerState
         staminaRegain = playerMover.playerValues.chargeAttackStateValues.StaminaRegain;
         explodePower = playerMover.playerValues.chargeAttackStateValues.ExplodePower;
         explodeRadius = playerMover.playerValues.chargeAttackStateValues.ExplodeRadius;
+        punchPower = playerMover.playerValues.chargeAttackStateValues.PunchPower;
 
         attackTarget = target;
         timer = 0;
@@ -50,7 +52,7 @@ public class ChargeAttackState : PlayerState
 
     public override void Enter()
     {
-        attackTarget.collider.gameObject.GetComponent<EnemyController>().freeze();
+        attackTarget.collider.gameObject.GetComponent<EnemyController>().Freeze();
         Vector3 attackTargetPosition = attackTarget.collider.gameObject.transform.position;
         initialPosition = playerMover.transform.position;
         moveTarget = attackTargetPosition - Vector3.Normalize(attackTargetPosition - initialPosition)*endingDistance;
@@ -85,7 +87,10 @@ public class ChargeAttackState : PlayerState
             playerMover.Move(Vector3.zero);
             if (attackTarget.collider != null)
             {
-                attackTarget.collider.gameObject.GetComponent<EnemyController>().takeDamage(attackTarget.point);
+                EnemyController enemy = attackTarget.collider.gameObject.GetComponent<EnemyController>();
+                Vector3 direction = (attackTarget.point - playerMover.transform.position).normalized;
+                enemy.UnfreezeImpacts();
+                enemy.takeDamage(direction*punchPower);
             }
             
             attacked = true;

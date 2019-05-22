@@ -5,15 +5,25 @@ using UnityEngine;
 public class ImpactReceiver : MonoBehaviour {
 
     float mass;
+    float groundFriction;
+    float airFriction;
+    float recoveryImpact;
     Vector3 impact = Vector3.zero;
-    private CharacterController character;
-    //PlayerMover playerMover;
+    CharacterController character;
+    bool frozen;
+    bool impactActive;
+    public bool isImpactActive { get { return impactActive; } }
  
     void Start()
     {
-        mass = GetComponent<ActorValues>().impactValues.Mass;
+        frozen = false;
+        impactActive = false;
+        ActorValues actorValues = GetComponent<ActorValues>();
+        mass = actorValues.impactValues.Mass;
+        groundFriction = actorValues.impactValues.GroundFriction;
+        airFriction = actorValues.impactValues.AirFriction;
+        recoveryImpact = actorValues.impactValues.RecoveryImpact;
         character = GetComponent<CharacterController>();
-        //playerMover = gameObject.GetComponent<PlayerMover>();
     }
 
     // call this function to add an impact force:
@@ -22,17 +32,53 @@ public class ImpactReceiver : MonoBehaviour {
         direction.Normalize();
         if (direction.y < 0 && character.isGrounded)
         {
-            //direction.y = -direction.y; // reflect down force on the ground
             direction.y = 0; //prevents player from being launched into the air and unable to jump?
         }
         impact += direction.normalized * force / mass;
+        impactActive = true;
     }
 
-    void Update()
+    public void Reflect(Vector3 normal)
     {
-        // apply the impact force:
-        if (impact.magnitude > 0.2) character.Move(impact * Time.deltaTime);
-        // consumes the impact energy each cycle:
-        impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
+        impact = impact - 2 * (Vector3.Dot(impact, normal) * normal);
+    }
+
+    public void Freeze()
+    {
+        frozen = true;
+    }
+
+    public void Unfreeze()
+    {
+        frozen = false;
+    }
+
+    void FixedUpdate()
+    {
+        if (!frozen && impactActive)
+        {
+            // set impact to zero if below recovery threshold
+            if (impact.magnitude <= recoveryImpact)
+            {
+                impact = Vector3.zero;
+                character.Move(impact);
+                impactActive = false;
+                return;
+            }
+
+            impact += Physics.gravity * Time.deltaTime;
+
+            if (character.isGrounded)
+            {
+                //Apply ground friction
+                impact = Vector3.Lerp(impact, Vector3.zero, Time.fixedDeltaTime * groundFriction);
+            }
+            else
+            {
+                //Apply air friction
+                impact = Vector3.Lerp(impact, Vector3.zero, Time.fixedDeltaTime * airFriction);
+            }
+            character.Move(impact * Time.fixedDeltaTime);
+        }
     }
 }

@@ -48,6 +48,7 @@ public class HumanoidEnemyController : EnemyController {
         defaultSpeed = nav.speed;
         dead = false;
         frozen = false;
+        base.Start();
 	}
 	
 	// Update is called once per frame
@@ -100,6 +101,7 @@ public class HumanoidEnemyController : EnemyController {
                 Destroy(this.gameObject);
             }
         }
+        base.FixedUpdate();
 	}
     
 	public override void takeDamage(Vector3 point){
@@ -142,7 +144,7 @@ public class HumanoidEnemyController : EnemyController {
         }
     }
 
-    public override void freeze()
+    public override void Freeze()
     {
         nav.enabled = false;
         frozen = true;

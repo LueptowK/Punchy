@@ -810,6 +810,7 @@ GameObject:
   - component: {fileID: 143711379090747842}
   - component: {fileID: 114434377343338508}
   - component: {fileID: 5703520417812528612}
+  - component: {fileID: 3003544167766371542}
   m_Layer: 9
   m_Name: humanoidEnemy
   m_TagString: Enemy
@@ -937,6 +938,7 @@ MonoBehaviour:
   enemyAttackTokenPool: {fileID: 0}
   player: {fileID: 0}
   nav: {fileID: 195734965169488068}
+  spawnManager: {fileID: 0}
   playerCamera: {fileID: 0}
   scoreValue: 10
   explosion: {fileID: 198287054347171484, guid: 6f80f9ee45d6f3145957d7e82774c065,
@@ -992,6 +994,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 1
+    groundFriction: 5
+    airFriction: 1
+    recoveryImpact: 1
+--- !u!114 &3003544167766371542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890200285836438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aaf847642cc16a4bb3c53850f5569dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactValues:
+    mass: 1
+    groundFriction: 5
+    airFriction: 1
+    recoveryImpact: 1
+  generalValues:
+    healthValue: 1
+    impactToKill: 1000
+    knockbackModifier: 10
 --- !u!1 &1919580943243380
 GameObject:
   m_ObjectHideFlags: 0
