@@ -7,6 +7,7 @@ public abstract class PickupController : MonoBehaviour
     protected PickupSpawner.PickupType type;
     public float timer;
     protected float despawnRate = 20;
+    [SerializeField] protected PickupSpawner pickupSpawner;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -22,12 +23,12 @@ public abstract class PickupController : MonoBehaviour
         //print(timer);
 
     }  
-	/*
-	 public virtual void takeDamage(Vector3 point)
+	
+	 public virtual void takeDamage()
     {
         this.gameObject.GetComponent<PickupSpawner>().PickedUp(this.gameObject);
     }
-	
+	/*
     public virtual void freeze()
     {
         nav.enabled = false;

@@ -12,9 +12,11 @@ public class HealthPickup : PickupController
         col.gameObject.GetComponent<PlayerHealth>().GainHealth(HealthAmount);
        // col.gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
     } */
-	 public void takeDamage()
+	 public override void takeDamage()
     {
-        (this.gameObject).GetComponent<PickupSpawner>().PickedUp(gameObject);
+
+        pickupSpawner.gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
+        pickupSpawner.gameObject.GetComponent<PlayerHealth>().GainHealth(HealthAmount);
 		Destroy(gameObject);
     }
 }

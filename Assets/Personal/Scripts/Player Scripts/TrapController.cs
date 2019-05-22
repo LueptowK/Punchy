@@ -33,7 +33,6 @@ public class TrapController : MonoBehaviour
 		}
 		else if(!trapOn & trapTimer >= trapWarmup) {
 			TriggerWarmup();
-			Debug.Log(trapTimer);
 		}
     }
 
@@ -41,7 +40,7 @@ public class TrapController : MonoBehaviour
 		if(!trapOn) {
 			gameObject.GetComponent<Renderer> ().material.color = Color.red;
 			trapOn = true;
-			Debug.Log(trapTimer);
+		
 
 		}
 		else {
@@ -68,7 +67,7 @@ public class TrapController : MonoBehaviour
 		Debug.Log("Boop");
 		if(col.gameObject.tag == "Player" ) {
 			if(trapOn) {
-				col.gameObject.GetComponent<PlayerHealth>().TakeDamage( 5, new Vector3(0 , -1, 0), 0);
+				col.gameObject.GetComponent<PlayerHealth>().TakeDamage( 1, new Vector3(0 , -1, 0), 0);
 			}	
 		}
 	}

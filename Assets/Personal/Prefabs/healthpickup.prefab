@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
+  pickupSpawner: {fileID: 0}
   HealthAmount: 10
 --- !u!82 &4059116046327750116
 AudioSource:
