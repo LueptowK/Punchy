@@ -8,6 +8,7 @@ public class ImpactReceiver : MonoBehaviour {
     float groundFriction;
     float airFriction;
     float recoveryImpact;
+    float bounceRatio;
     Vector3 impact = Vector3.zero;
     CharacterController character;
     bool frozen;
@@ -23,6 +24,7 @@ public class ImpactReceiver : MonoBehaviour {
         groundFriction = actorValues.impactValues.GroundFriction;
         airFriction = actorValues.impactValues.AirFriction;
         recoveryImpact = actorValues.impactValues.RecoveryImpact;
+        bounceRatio = actorValues.impactValues.BounceRatio;
         character = GetComponent<CharacterController>();
     }
 
@@ -40,7 +42,7 @@ public class ImpactReceiver : MonoBehaviour {
 
     public void Reflect(Vector3 normal)
     {
-        impact = impact - 2 * (Vector3.Dot(impact, normal) * normal);
+        impact = impact - (1+bounceRatio) * (Vector3.Dot(impact, normal) * normal);
     }
 
     public void Freeze()

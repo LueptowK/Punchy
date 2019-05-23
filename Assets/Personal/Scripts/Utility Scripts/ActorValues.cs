@@ -13,11 +13,13 @@ public class ActorValues : MonoBehaviour
         [SerializeField] float groundFriction;
         [SerializeField] float airFriction;
         [SerializeField] float recoveryImpact;
+        [SerializeField] float bounceRatio;
 
         public float Mass { get { return mass; } }
         public float GroundFriction { get { return groundFriction; } }
         public float AirFriction { get { return airFriction; } }
         public float RecoveryImpact { get { return recoveryImpact; } }
+        public float BounceRatio { get { return bounceRatio; } }
 
     }
 }
