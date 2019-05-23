@@ -363,6 +363,11 @@ public class CylinderEnemyController : EnemyController
             stateTimer = 0;
             GameObject fractureInstance = Instantiate(fractures, transform.position, transform.rotation);
             fractureInstance.GetComponent<AudioSpeedByTime>().AssignTimeScaleManager(player.GetComponentInChildren<TimeScaleManager>());
+            Rigidbody[] fractureCells = fractureInstance.GetComponentsInChildren<Rigidbody>();
+            foreach (Rigidbody cell in fractureCells)
+            {
+                cell.velocity = old_velocity;
+            }
             Instantiate(explosion, transform.position, transform.rotation);
             explosion.Play();
 

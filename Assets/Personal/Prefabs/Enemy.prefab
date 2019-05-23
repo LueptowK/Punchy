@@ -442,7 +442,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2.3
+  m_Height: 2
   m_Radius: 0.5000001
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -586,9 +586,10 @@ MonoBehaviour:
   impactValues:
     mass: 1
     groundFriction: 5
-    airFriction: 0.25
+    airFriction: 0.5
     recoveryImpact: 1
+    bounceRatio: 0.75
   generalValues:
     healthValue: 2
     impactToDamage: 10
-    knockbackModifier: 20
+    knockbackModifier: 30
