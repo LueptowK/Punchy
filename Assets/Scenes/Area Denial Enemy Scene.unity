@@ -2315,6 +2315,11 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 297547910}
+    - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
+        type: 3}
+      propertyPath: energyBallsParent
+      value: 
+      objectReference: {fileID: 1475018072}
     - target: {fileID: 3293244435944367793, guid: 7123117918a8f964993be52c6c58a263,
         type: 3}
       propertyPath: m_Enabled
@@ -15662,11 +15667,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 5071186735562750649, guid: c8fdea685493baf4eb6547fc19d330ca,
-        type: 3}
-      propertyPath: timeScaleManager
-      value: 
-      objectReference: {fileID: 855993077}
     - target: {fileID: 4406372592076846, guid: c8fdea685493baf4eb6547fc19d330ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -15732,6 +15732,11 @@ PrefabInstance:
       propertyPath: spawnManager
       value: 
       objectReference: {fileID: 297547915}
+    - target: {fileID: 5071186735562750649, guid: c8fdea685493baf4eb6547fc19d330ca,
+        type: 3}
+      propertyPath: timeScaleManager
+      value: 
+      objectReference: {fileID: 855993077}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8fdea685493baf4eb6547fc19d330ca, type: 3}
 --- !u!1 &1470570780 stripped
@@ -15805,6 +15810,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2110891202}
   m_RootOrder: 43
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1475018072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1475018073}
+  m_Layer: 0
+  m_Name: EnergyBalls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1475018073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475018072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.293068, y: 2.5333347, z: -14.444496}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1487758905
 GameObject:

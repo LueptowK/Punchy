@@ -16,6 +16,9 @@ public class EnergyBallProjectileController : MonoBehaviour
     float accumulatedDamage;
     Collider otherCollider;
 
+    GameObject player;
+    GameObject wizard;
+
     // Use this for initialization
     void Awake()
     {
@@ -33,7 +36,11 @@ public class EnergyBallProjectileController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (wizard ==null) // if wizard has been destroyed
+        {
+            StartDeathSequence();
+        }
+        UpdateTrajectory();
     }
 
     void FixedUpdate()
@@ -43,9 +50,12 @@ public class EnergyBallProjectileController : MonoBehaviour
         //rb.velocity = newVelocity;
     }
 
-    public void Fire(Vector3 wizardPosition, Vector3 playerPosition, float speed, float damage, float force, EnemyAttackTokenPool.Token token, EnemyAttackTokenPool enemyAttackTokenPool)
+    // this is directly after the energy ball is instatiated
+    public void Fire(GameObject wizardObject, GameObject playerObject, float speed, float damage, float force, EnemyAttackTokenPool.Token token, EnemyAttackTokenPool enemyAttackTokenPool)
     {
-        Vector3 unitDirection = (playerPosition - wizardPosition).normalized;
+        this.wizard = wizardObject;
+        this.player = playerObject;
+        Vector3 unitDirection = (player.transform.position - wizard.transform.position).normalized;
         Vector3 velocityWithoutArc = unitDirection * speed;
         //float distance = Vector3.Distance(wizardPosition, playerPosition);
         //float timeToPlayer = distance / speed;
@@ -61,19 +71,6 @@ public class EnergyBallProjectileController : MonoBehaviour
         //bit of a stopgap cuz I don't really know how shaders work yet
         // //this.transform.Rotate(0, 90, 0);
     }
-
-    //private void OnCollisionEnter(Collision other)
-    //{
-    //    if (other.gameObject.tag != "Enemy" && other.gameObject.tag != "Hitbox")
-    //    {
-    //        if (other.gameObject.tag == "Player")
-    //        {
-    //            Debug.Log("collision with player");
-    // could have enemy do extra damage if it physically touches player
-    //        }
-    //    }
-    //}
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag != "Enemy" && other.gameObject.tag != "Hitbox")
@@ -113,9 +110,9 @@ public class EnergyBallProjectileController : MonoBehaviour
         }
     }
 
-    public void UpdateTrajectory(Vector3 playerPosition)
+    public void UpdateTrajectory()
     {
-        Vector3 unitDirection = (playerPosition - this.transform.position).normalized;
+        Vector3 unitDirection = (player.transform.position - this.transform.position).normalized;
         Vector3 velocityWithoutArc = unitDirection * speed;
         //float distance = Vector3.Distance(this.transform.position, playerPosition);
         //float timeToPlayer = distance / speed;
@@ -124,10 +121,16 @@ public class EnergyBallProjectileController : MonoBehaviour
         rb.velocity = velocityWithoutArc;
     }
 
-    public void Die()
+    private void Die()
     {
         tokenPool.ReturnToken(SpawnManager.EnemyType.CowardlyWizard, token);
         Destroy(this.gameObject);
+    }
+
+    private void StartDeathSequence()
+    {
+        // wait for some time and/or fade out
+        Die();
     }
 
     IEnumerator DamageOverTime()
@@ -142,8 +145,7 @@ public class EnergyBallProjectileController : MonoBehaviour
             }
 
             yield return new WaitForSeconds(2);
-        }
-       
+        }     
     }
 
     public float Timer

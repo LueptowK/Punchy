@@ -21,18 +21,20 @@ public class CowardlyWizardEnemyController : EnemyController
     [SerializeField] float firingFrequencyRange;
     [SerializeField] float fireWindupTime;
     [SerializeField] int scoreValue;
+    [SerializeField] float bulletDamage;
+    [SerializeField] private float energyBallDuration;
+    [SerializeField] float bulletSpeed;
+    [SerializeField] private GameObject energyBallPrefab;
+    [SerializeField] private GameObject energyBallsParent;
     private float timeToNextFire;
     private float fireTimer;
     private float stateTimer;
     private float reevaluateTetherTime;
     bool firing;
     bool dead;
-    [SerializeField] private GameObject energyBallPrefab;
     NavMeshHit closestHit;
-    [SerializeField] float bulletSpeed;
     float bulletForce;
-    [SerializeField] float bulletDamage;
-    [SerializeField] private float energyBallDuration;
+ 
 
 
     // Start is called before the first frame update
@@ -67,7 +69,7 @@ public class CowardlyWizardEnemyController : EnemyController
     protected override void Update()
     {
         if (!firing) fireTimer += Time.deltaTime;
-        UpdateEnergyBalls();
+        //UpdateEnergyBalls();
     }
 
     // Update is called once per frame
@@ -75,7 +77,7 @@ public class CowardlyWizardEnemyController : EnemyController
     {
         if (dead)
         {
-            // handled by TakeDamage and Die()
+            // handled by TakeDamage and Die() because one hit kills
         }
 
         if (!dead && nav.enabled)
@@ -243,33 +245,34 @@ public class CowardlyWizardEnemyController : EnemyController
         fireTimer = 0;
         transform.LookAt(player.gameObject.transform.position);
         GameObject energyBall = Instantiate(energyBallPrefab, this.transform.position, this.transform.rotation);
-        energyBalls.Add(energyBall);
-        energyBall.GetComponent<EnergyBallProjectileController>().Fire(this.transform.position, player.transform.position, bulletSpeed, bulletDamage, bulletForce, token, enemyAttackTokenPool);
+        energyBall.transform.parent = energyBallsParent.transform;
+        //energyBalls.Add(energyBall);
+        energyBall.GetComponent<EnergyBallProjectileController>().Fire(this.gameObject, player, bulletSpeed, bulletDamage, bulletForce, token, enemyAttackTokenPool);
         EndAttack();
 
     }
 
-    private void UpdateEnergyBalls()
-    {
-        EnergyBallProjectileController projectileController;
-        if (energyBalls.Count == 0) return;
-        foreach (GameObject ball in energyBalls)
-        {
-            if (ball == null)
-            {
-                Debug.LogError("Energy Ball has been destroyed or has otherwise become null, but not removed from energyBalls list");
-            }
-            projectileController = ball.GetComponent<EnergyBallProjectileController>();
-            if (projectileController.Timer > energyBallDuration)
-            {
-                projectileController.Die();
-                energyBalls.Remove(ball); // might not be necessary?
-                return;
-            }
-            projectileController.UpdateTrajectory(player.transform.position);
+    //private void UpdateEnergyBalls()
+    //{
+    //    EnergyBallProjectileController projectileController;
+    //    if (energyBalls.Count == 0) return;
+    //    foreach (GameObject ball in energyBalls)
+    //    {
+    //        if (ball == null)
+    //        {
+    //            Debug.LogError("Energy Ball has been destroyed or has otherwise become null, but not removed from energyBalls list");
+    //        }
+    //        projectileController = ball.GetComponent<EnergyBallProjectileController>();
+    //        if (projectileController.Timer > energyBallDuration)
+    //        {
+    //            projectileController.Die();
+    //            energyBalls.Remove(ball); // might not be necessary?
+    //            return;
+    //        }
+    //        projectileController.UpdateTrajectory(player.transform.position);
 
-        }
-    }
+    //    }
+    //}
 
     public override void takeDamage(Vector3 point)
     {
@@ -280,10 +283,10 @@ public class CowardlyWizardEnemyController : EnemyController
     {
         playerCamera.gameObject.GetComponent<ScoreTracker>().ChangeScore(scoreValue, transform.position);
 
-        foreach (GameObject ball in energyBalls)
-        {
-            ball.GetComponent<EnergyBallProjectileController>().Die();
-        }
+        //foreach (GameObject ball in energyBalls)
+        //{
+        //    ball.GetComponent<EnergyBallProjectileController>().Die();
+        //}
         //Destroy(this.gameObject);
         DestroyThis(); // Tells the spawnmanager to delete
     }
