@@ -22,7 +22,7 @@ public class CowardlyWizardEnemyController : EnemyController
     [SerializeField] float fireWindupTime;
     [SerializeField] int scoreValue;
     [SerializeField] float bulletDamage;
-    [SerializeField] private float energyBallDuration;
+    [SerializeField] private int maxNumberOfEnergyBalls;
     [SerializeField] float bulletSpeed;
     [SerializeField] private GameObject energyBallPrefab;
     [SerializeField] private GameObject energyBallsParent;
@@ -69,7 +69,7 @@ public class CowardlyWizardEnemyController : EnemyController
     protected override void Update()
     {
         if (!firing) fireTimer += Time.deltaTime;
-        //UpdateEnergyBalls();
+        UpdateEnergyBalls();
     }
 
     // Update is called once per frame
@@ -99,9 +99,6 @@ public class CowardlyWizardEnemyController : EnemyController
 
     private enemyState MoveToTether()
     {
-        //PROBLEM: tether = this.findBestTether();
-        // check if position is in radius of tether
-
         nav.speed = defaultSpeed * 1.5f; // run faster when trying to get to tether
         if (Vector3.Distance(tether.transform.position, this.transform.position) <= tetherRadius)
         {
@@ -223,17 +220,14 @@ public class CowardlyWizardEnemyController : EnemyController
 
     private bool TryAttack(int attackType)
     {
-        if (Vector3.Distance(this.transform.position, player.transform.position) < 10f) 
-        {
-            return false; // don't fire when right next to player
-        }
+        if (Vector3.Distance(this.transform.position, player.transform.position) < 10f) return false; // don't fire when right next to player
+        if (energyBalls.Count >= maxNumberOfEnergyBalls) return false;
         token = enemyAttackTokenPool.RequestToken(this.gameObject, attackType);
         return (token != null);
     }
 
     private void EndAttack()
     {
-        //enemyAttackTokenPool.ReturnToken(this.type, token);
         token = null;
         firing = false;
         timeToNextFire = firingFrequency + Random.Range(-firingFrequencyRange, firingFrequencyRange);
@@ -246,33 +240,32 @@ public class CowardlyWizardEnemyController : EnemyController
         transform.LookAt(player.gameObject.transform.position);
         GameObject energyBall = Instantiate(energyBallPrefab, this.transform.position, this.transform.rotation);
         energyBall.transform.parent = energyBallsParent.transform;
-        //energyBalls.Add(energyBall);
+        energyBalls.Add(energyBall);
         energyBall.GetComponent<EnergyBallProjectileController>().Fire(this.gameObject, player, bulletSpeed, bulletDamage, bulletForce, token, enemyAttackTokenPool);
         EndAttack();
-
     }
 
-    //private void UpdateEnergyBalls()
-    //{
-    //    EnergyBallProjectileController projectileController;
-    //    if (energyBalls.Count == 0) return;
-    //    foreach (GameObject ball in energyBalls)
-    //    {
-    //        if (ball == null)
-    //        {
-    //            Debug.LogError("Energy Ball has been destroyed or has otherwise become null, but not removed from energyBalls list");
-    //        }
-    //        projectileController = ball.GetComponent<EnergyBallProjectileController>();
-    //        if (projectileController.Timer > energyBallDuration)
-    //        {
-    //            projectileController.Die();
-    //            energyBalls.Remove(ball); // might not be necessary?
-    //            return;
-    //        }
-    //        projectileController.UpdateTrajectory(player.transform.position);
+    private void UpdateEnergyBalls()
+    {
+        energyBalls.RemoveAll(ball => ball == null);
+        //EnergyBallProjectileController projectileController;
+        //foreach (GameObject ball in energyBalls)
+        //{
+        //    if (ball == null)
+        //    {
+        //        energyBalls.Remove(ball); // remove balls that no longer exist
+        //    }
+            //projectileController = ball.GetComponent<EnergyBallProjectileController>();
+            //if (projectileController.Timer > energyBallDuration)
+            //{
+            //    projectileController.Die();
+            //    energyBalls.Remove(ball); // might not be necessary?
+            //    return;
+            //}
+            //projectileController.UpdateTrajectory(player.transform.position);
 
-    //    }
-    //}
+        //}
+    }
 
     public override void takeDamage(Vector3 point)
     {

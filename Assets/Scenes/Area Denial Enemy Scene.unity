@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.4500295, g: 0.50008404, b: 0.5755013, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -88,7 +88,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 37dbe680b1417674dae4c6275b059855,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -15667,6 +15668,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5071186735562750649, guid: c8fdea685493baf4eb6547fc19d330ca,
+        type: 3}
+      propertyPath: timeScaleManager
+      value: 
+      objectReference: {fileID: 855993077}
     - target: {fileID: 4406372592076846, guid: c8fdea685493baf4eb6547fc19d330ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -15732,11 +15738,6 @@ PrefabInstance:
       propertyPath: spawnManager
       value: 
       objectReference: {fileID: 297547915}
-    - target: {fileID: 5071186735562750649, guid: c8fdea685493baf4eb6547fc19d330ca,
-        type: 3}
-      propertyPath: timeScaleManager
-      value: 
-      objectReference: {fileID: 855993077}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8fdea685493baf4eb6547fc19d330ca, type: 3}
 --- !u!1 &1470570780 stripped
@@ -20952,6 +20953,11 @@ PrefabInstance:
       propertyPath: firingFrequencyRange
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3293244435944367803, guid: 7123117918a8f964993be52c6c58a263,
+        type: 3}
+      propertyPath: m_Speed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3293244435944367793, guid: 7123117918a8f964993be52c6c58a263,
         type: 3}
       propertyPath: enemyAttackTokenPool
@@ -20976,11 +20982,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293244435944367803, guid: 7123117918a8f964993be52c6c58a263,
-        type: 3}
-      propertyPath: m_Speed
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3293244435944367793, guid: 7123117918a8f964993be52c6c58a263, type: 3}
@@ -21274,7 +21275,7 @@ PrefabInstance:
     - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
         type: 3}
       propertyPath: tokenPoolsEnemyTypes.Array.data[3].tokenGrowthPerAttackType.Array.data[0]
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
         type: 3}
@@ -21294,7 +21295,7 @@ PrefabInstance:
     - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
         type: 3}
       propertyPath: spawnDifficultyValues.baseSpawnLimits.Array.data[0]
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
         type: 3}

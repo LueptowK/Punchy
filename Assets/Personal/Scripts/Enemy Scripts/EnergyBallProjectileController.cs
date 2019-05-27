@@ -6,6 +6,7 @@ public class EnergyBallProjectileController : MonoBehaviour
 {
     private float damage;
     [SerializeField] private int immediateDamage;
+    [SerializeField] private float energyBallDuration;
     private float speed;
     private Rigidbody rb;
     private float timer;  // give this a Get 
@@ -36,7 +37,7 @@ public class EnergyBallProjectileController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (wizard ==null) // if wizard has been destroyed
+        if (wizard == null || timer > energyBallDuration) // if wizard has been destroyed
         {
             StartDeathSequence();
         }
