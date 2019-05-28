@@ -7,7 +7,8 @@ public class EnergyBallProjectileController : MonoBehaviour
     private float damage;
     [SerializeField] private int immediateDamage;
     [SerializeField] private float energyBallDuration;
-    private float speed;
+    [SerializeField] private float maxForce;
+    private float maxSpeed;
     private Rigidbody rb;
     private float timer;  // give this a Get 
     private float force;
@@ -19,7 +20,10 @@ public class EnergyBallProjectileController : MonoBehaviour
 
     GameObject player;
     GameObject wizard;
+    GameObject energyBallsParent;
+    ActorValues actorValues;
 
+    
     // Use this for initialization
     void Awake()
     {
@@ -31,6 +35,7 @@ public class EnergyBallProjectileController : MonoBehaviour
     {
         timer = 0;
         playerInRange = false;
+        actorValues = GetComponent<ActorValues>();
         StartCoroutine(DamageOverTime());
     }
 
@@ -51,35 +56,29 @@ public class EnergyBallProjectileController : MonoBehaviour
         //rb.velocity = newVelocity;
     }
 
-    // this is directly after the energy ball is instatiated
-    public void Fire(GameObject wizardObject, GameObject playerObject, float speed, float damage, float force, EnemyAttackTokenPool.Token token, EnemyAttackTokenPool enemyAttackTokenPool)
-    {
+    public void Initialize(GameObject wizardObject, GameObject playerObject, EnemyAttackTokenPool enemyAttackTokenPool, GameObject energyBallsParent) {
         this.wizard = wizardObject;
         this.player = playerObject;
+        this.tokenPool = enemyAttackTokenPool;
+        this.energyBallsParent = energyBallsParent;
+    }
+
+    // this is directly after the energy ball is instatiated
+    public void Fire(float speed, float damage, float force, EnemyAttackTokenPool.Token token)
+    {     
         Vector3 unitDirection = (player.transform.position - wizard.transform.position).normalized;
-        Vector3 velocityWithoutArc = unitDirection * speed;
-        //float distance = Vector3.Distance(wizardPosition, playerPosition);
-        //float timeToPlayer = distance / speed;
-        //float initialYVelocity = gravity * timeToPlayer / 2f;
-        //Vector3 desiredVelocity = new Vector3(velocityWithoutArc.x, velocityWithoutArc.y + initialYVelocity, velocityWithoutArc.z);
-        //rb.velocity = desiredVelocity;
-        rb.velocity = velocityWithoutArc;
+        Vector3 velocity = unitDirection * speed;
+        rb.velocity = velocity;
         this.damage = damage;
         this.force = force;
-        this.speed = speed;
+        this.maxSpeed = speed;
         this.token = token;
-        this.tokenPool = enemyAttackTokenPool;
-        //bit of a stopgap cuz I don't really know how shaders work yet
-        // //this.transform.Rotate(0, 90, 0);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Enemy" && other.gameObject.tag != "Hitbox")
+        if (other.gameObject.tag == "Player")
         {
-            if (other.gameObject.tag == "Player")
-            {
-                other.gameObject.GetComponent<PlayerHealth>().TakeDamage(immediateDamage, rb.velocity.normalized, force);
-            }
+            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(immediateDamage, rb.velocity.normalized, force);
         }
     }
 
@@ -93,34 +92,64 @@ public class EnergyBallProjectileController : MonoBehaviour
                 playerInRange = true;
                 otherCollider = other;
                 accumulatedDamage += damage;
-                //other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage, rb.velocity.normalized, force);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag != "Enemy" && other.gameObject.tag != "Hitbox")
+        if (other.gameObject.tag == "Player")
         {
-            if (other.gameObject.tag == "Player")
-            {
-                playerInRange = false;
-                otherCollider = null;
-                //other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage, rb.velocity.normalized, force);
-            }
+            playerInRange = false;
+            otherCollider = null;
+            //other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage, rb.velocity.normalized, force);
         }
     }
 
-    public void UpdateTrajectory()
+    private void UpdateTrajectory()
     {
         Vector3 unitDirection = (player.transform.position - this.transform.position).normalized;
-        Vector3 velocityWithoutArc = unitDirection * speed;
-        //float distance = Vector3.Distance(this.transform.position, playerPosition);
-        //float timeToPlayer = distance / speed;
-        //float initialYVelocity = gravity * timeToPlayer / 2f;
-        //Vector3 desiredVelocity = new Vector3(velocityWithoutArc.x, velocityWithoutArc.y + initialYVelocity, velocityWithoutArc.z);
-        rb.velocity = velocityWithoutArc;
+        Vector3 desiredVelocity = unitDirection * maxSpeed;
+        Vector3 steering = desiredVelocity - rb.velocity;
+        if (steering.magnitude > maxForce) steering = Vector3.ClampMagnitude(steering, maxForce);
+        steering = steering / actorValues.impactValues.Mass;
+        Vector3 steeredVelocity = rb.velocity + steering;
+        if (steeredVelocity.magnitude > maxSpeed) steeredVelocity = Vector3.ClampMagnitude(steeredVelocity, maxSpeed);
+        rb.velocity = steeredVelocity;
+
+        Vector3 separation = computeSeparation();
+        rb.velocity += separation;
+
     }
+
+    private Vector3 computeSeparation()
+    {
+        int neighborCount = 0;
+        Vector3 computationVector = new Vector3();
+        foreach (Transform agent in energyBallsParent.transform)
+        {
+            if (agent != this.transform)
+            {
+                float distanceFromPlayer = (agent.transform.position - player.transform.position).magnitude;
+                // weight so that when distancfe from player is high they separate more
+                computationVector += (agent.transform.position - this.transform.position)*distanceFromPlayer; 
+                neighborCount++;
+            }
+        }
+        if (neighborCount == 0) return computationVector;
+
+        // divide by neighbor count and negate
+        computationVector /= neighborCount * -1;
+        return computationVector.normalized;
+    }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Ray v = new Ray(this.transform.position, rb.velocity);
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawRay(v);
+    //    Debug.DrawRay(this.transform.position, rb.velocity, Color.red, rb.velocity.magnitude);
+    //}
 
     private void Die()
     {
@@ -147,13 +176,5 @@ public class EnergyBallProjectileController : MonoBehaviour
 
             yield return new WaitForSeconds(2);
         }     
-    }
-
-    public float Timer
-    {
-        get
-        {
-            return timer;
-        }
     }
 }

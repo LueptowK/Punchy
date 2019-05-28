@@ -21295,7 +21295,7 @@ PrefabInstance:
     - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
         type: 3}
       propertyPath: spawnDifficultyValues.baseSpawnLimits.Array.data[0]
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
         type: 3}

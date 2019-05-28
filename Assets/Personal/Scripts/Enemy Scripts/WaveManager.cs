@@ -97,6 +97,12 @@ public class WaveManager : MonoBehaviour
 
         totalEnemiesInWave = (int)(20 * difficulty);
 
+        // useful for testing
+        //if (waveCount == 0)
+        //{
+        //    totalEnemiesInWave = 1;
+        //}
+
         if (totalEnemiesInWave < 10) subWaveEnemyNumber = totalEnemiesInWave;
         else subWaveEnemyNumber = (int)Mathf.Floor(totalEnemiesInWave / 3);
 

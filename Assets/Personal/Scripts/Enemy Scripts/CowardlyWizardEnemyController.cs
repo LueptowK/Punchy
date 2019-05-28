@@ -69,7 +69,8 @@ public class CowardlyWizardEnemyController : EnemyController
     protected override void Update()
     {
         if (!firing) fireTimer += Time.deltaTime;
-        UpdateEnergyBalls();
+        energyBalls.RemoveAll(ball => ball == null);// lambda expression, removes all items in list that are null
+        //UpdateEnergyBalls();
     }
 
     // Update is called once per frame
@@ -241,13 +242,14 @@ public class CowardlyWizardEnemyController : EnemyController
         GameObject energyBall = Instantiate(energyBallPrefab, this.transform.position, this.transform.rotation);
         energyBall.transform.parent = energyBallsParent.transform;
         energyBalls.Add(energyBall);
-        energyBall.GetComponent<EnergyBallProjectileController>().Fire(this.gameObject, player, bulletSpeed, bulletDamage, bulletForce, token, enemyAttackTokenPool);
+        energyBall.GetComponent<EnergyBallProjectileController>().Initialize(this.gameObject, player, enemyAttackTokenPool, energyBallsParent);
+        energyBall.GetComponent<EnergyBallProjectileController>().Fire(bulletSpeed, bulletDamage, bulletForce, token);
         EndAttack();
     }
 
     private void UpdateEnergyBalls()
     {
-        energyBalls.RemoveAll(ball => ball == null);
+       
         //EnergyBallProjectileController projectileController;
         //foreach (GameObject ball in energyBalls)
         //{

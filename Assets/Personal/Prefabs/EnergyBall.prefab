@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 2275956131872324303}
   - component: {fileID: 6502664482467443967}
   - component: {fileID: 7588370432640191961}
+  - component: {fileID: 6445414648795508670}
   m_Layer: 12
   m_Name: EnergyBall
   m_TagString: Untagged
@@ -200,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   immediateDamage: 5
   energyBallDuration: 40
+  maxForce: 100
 --- !u!54 &6502664482467443967
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -229,3 +231,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6445414648795508670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6549469861394236073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22856cb0cf389a247a26e175618278ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactValues:
+    mass: 1
+    groundFriction: 5
+    airFriction: 0.25
+    recoveryImpact: 1
+    bounceRatio: 0
