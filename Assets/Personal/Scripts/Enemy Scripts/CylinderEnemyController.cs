@@ -331,7 +331,7 @@ public class CylinderEnemyController : EnemyController
             bulletSpeed, 
             player.transform.position, 
             player.GetComponent<CharacterController>().velocity);
-        Debug.Log("attempting to fire towards " + firstOrderIntercept);
+        //Debug.Log("attempting to fire towards " + firstOrderIntercept);
         // Debug.Log("Enemy velocity is" + nav.velocity);
         
        bullet.GetComponent<Projectile>().Fire(this.transform.position, firstOrderIntercept, bulletSpeed, bulletDamage, bulletForce);
