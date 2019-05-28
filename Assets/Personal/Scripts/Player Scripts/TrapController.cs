@@ -10,12 +10,16 @@ public class TrapController : MonoBehaviour
 	float trapTimer;
 	bool trapOn = false;
 	float trapDuration = 10;
+	float damage = .1f;
 	float trapWarmup = 15;
+	float accumulatedDamage;
+	bool playerContact = false;
+	[SerializeField] GameObject player;
 
 
     void Start()
     {
-        
+        StartCoroutine(DamageOverTime());
     }
 
     // Update is called once per frame
@@ -64,11 +68,45 @@ public class TrapController : MonoBehaviour
 		}
 	} */
 	private void OnTriggerStay(Collider col) {
-		Debug.Log("Boop");
-		if(col.gameObject.tag == "Player" ) {
-			if(trapOn) {
-				col.gameObject.GetComponent<PlayerHealth>().TakeDamage( 1, new Vector3(0 , -1, 0), 0);
-			}	
-		}
+		if(col.gameObject.tag == "Player" & trapOn) {
+			
+			playerContact = true;	
+			accumulatedDamage += damage;
+			Debug.Log("stay");
+			}
+				
+				//col.gameObject.GetComponent<PlayerHealth>().TakeDamage( 1, new Vector3(0 , -1, 0), 0);
+		
+	
 	}
+
+	private void OnTriggerExit(Collider col) {
+		if(col.gameObject.tag == "Player") {
+			playerContact = false;
+			Debug.Log("stay");
+		}
+
+	}
+
+	  IEnumerator DamageOverTime()
+    {
+        while (true)
+        {
+            if (playerContact & trapOn) 
+            {
+				Debug.Log("running");
+                if (accumulatedDamage < 1f) {
+				accumulatedDamage = 1f;
+				}
+                player.GetComponent<PlayerHealth>().TakeDamage(Mathf.FloorToInt(accumulatedDamage), new Vector3(0, -1, 0), 0);
+                accumulatedDamage = 0f;
+            }
+
+            yield return new WaitForSeconds(.5f);
+        }
+       
+    }
+
+
+
 }

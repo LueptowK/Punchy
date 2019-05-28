@@ -13,7 +13,7 @@ public class EnergyBallProjectileController : MonoBehaviour
     EnemyAttackTokenPool.Token token;
     EnemyAttackTokenPool tokenPool;
     bool playerInRange;
-    float accumulatedDamage;
+    float accumulatedDamage = 0;
     Collider otherCollider;
 
     // Use this for initialization
