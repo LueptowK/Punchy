@@ -53,7 +53,7 @@ public class ChargeAttackState : PlayerState
     public override void Enter()
     {	
 		if ( attackTarget.collider.gameObject.tag == "Enemy"){
-			attackTarget.collider.gameObject.GetComponent<EnemyController>().freeze();
+			attackTarget.collider.gameObject.GetComponent<EnemyController>().Freeze();
 			} /*
 		else if (attackTarget.collider.gameObject.tag == "Pickup" ) {
 		attackTarget.collider.gameObject.GetComponent<PickupController>().freeze();
@@ -95,6 +95,7 @@ public class ChargeAttackState : PlayerState
 				      if (attackTarget.collider.gameObject.tag == "Enemy") {
                 attackTarget.collider.gameObject.GetComponent<EnemyController>().takeDamage(attackTarget.point);
                 Vector3 direction = (attackTarget.point - playerMover.transform.position).normalized;
+				EnemyController enemy = attackTarget.collider.gameObject.GetComponent<EnemyController>();
                 enemy.UnfreezeImpacts();
                 enemy.takeDamage(direction*punchPower);
 				      }
