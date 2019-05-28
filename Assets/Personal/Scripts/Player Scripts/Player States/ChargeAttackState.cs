@@ -92,17 +92,17 @@ public class ChargeAttackState : PlayerState
             playerMover.Move(Vector3.zero);
             if (attackTarget.collider != null)
             {	
-				      if (attackTarget.collider.gameObject.tag == "Enemy") {
-                attackTarget.collider.gameObject.GetComponent<EnemyController>().takeDamage(attackTarget.point);
-                Vector3 direction = (attackTarget.point - playerMover.transform.position).normalized;
-				EnemyController enemy = attackTarget.collider.gameObject.GetComponent<EnemyController>();
-                enemy.UnfreezeImpacts();
-                enemy.takeDamage(direction*punchPower);
-				      }
-				      else if (attackTarget.collider.gameObject.tag == "Pickup" ) {
-				        //Debug.Log("test");
-				        attackTarget.collider.gameObject.GetComponent<PickupController>().takeDamage();
-				      }
+				if (attackTarget.collider.gameObject.tag == "Enemy")
+                {
+                    Vector3 direction = (attackTarget.point - playerMover.transform.position).normalized;
+				    EnemyController enemy = attackTarget.collider.gameObject.GetComponent<EnemyController>();
+                    enemy.UnfreezeImpacts();
+                    enemy.takeDamage(direction*punchPower);
+				}
+				else if (attackTarget.collider.gameObject.tag == "Pickup" )
+                {
+				    attackTarget.collider.gameObject.GetComponent<PickupController>().takeDamage();
+				}
             }
             
             attacked = true;
