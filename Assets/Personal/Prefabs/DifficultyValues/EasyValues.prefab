@@ -69,10 +69,17 @@ MonoBehaviour:
     - 0
     attackTypeCooldowns:
     - 0
-  spawnDifficultyValues:
-    baseSpawnLimits: 020000000000000000000000
-    spawnLimitsGrowth:
+  - enemyType: 3
+    initialTokensPerAttackType: 02000000
+    tokenGrowthPerAttackType:
     - 0.5
+    attackTypeCooldowns:
+    - 8
+  spawnDifficultyValues:
+    baseSpawnLimits: 08000000020000000100000000000000
+    spawnLimitsGrowth:
+    - 0.25
     - 0.15
     - 0.2
+    - 0.1
   isDefaultValues: 0

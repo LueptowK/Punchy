@@ -26,10 +26,10 @@ public class SpiderController : EnemyController
     protected override void Start()
     {
         velocity = transform.forward * maxSpeed;
+        enemyMover = gameObject.GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
-    protected override void Update()
+    protected override void FixedUpdate()
     {
         if (!frozen && horizontalHeading != Vector2.zero)
         {
@@ -81,6 +81,12 @@ public class SpiderController : EnemyController
         }
     }
 
+    // Update is called once per frame
+    protected override void Update()
+    {
+        
+    }
+
     public void SetHeading(Vector3 goal, Vector3 centerOfMass)
     {
         Vector2 goalVector = (new Vector2(goal.x, goal.z) - new Vector2(transform.position.x, transform.position.z)).normalized;
@@ -120,13 +126,13 @@ public class SpiderController : EnemyController
         return Physics.OverlapSphere(transform.position, neighborRadius, LayerMask.GetMask("Spiders"));
     }
 
-    public override void freeze()
+    public override void Freeze()
     {
         controller.enabled = false;
         frozen = true;
     }
 
-    void OnControllerColliderHit(ControllerColliderHit collision)
+    protected override void OnControllerColliderHit(ControllerColliderHit collision)
     {
         if (wall == null && collision.collider.gameObject.layer == LayerMask.NameToLayer("Default")) {
             Vector3 surfaceNormal = collision.normal;

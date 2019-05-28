@@ -17,6 +17,7 @@ public class ChargeAttackState : PlayerState
     private float slowestTimeScale;
     private float slowmoLerpFactor;
     float staminaRegain;
+    float punchPower;
     bool dashing;
     bool attacked;
     TimeScaleManager timeScaleManager;
@@ -39,6 +40,7 @@ public class ChargeAttackState : PlayerState
         staminaRegain = playerMover.playerValues.chargeAttackStateValues.StaminaRegain;
         explodePower = playerMover.playerValues.chargeAttackStateValues.ExplodePower;
         explodeRadius = playerMover.playerValues.chargeAttackStateValues.ExplodeRadius;
+        punchPower = playerMover.playerValues.chargeAttackStateValues.PunchPower;
 
         attackTarget = target;
         timer = 0;
@@ -90,13 +92,16 @@ public class ChargeAttackState : PlayerState
             playerMover.Move(Vector3.zero);
             if (attackTarget.collider != null)
             {	
-				if (attackTarget.collider.gameObject.tag == "Enemy") {
+				      if (attackTarget.collider.gameObject.tag == "Enemy") {
                 attackTarget.collider.gameObject.GetComponent<EnemyController>().takeDamage(attackTarget.point);
-				}
-				else if (attackTarget.collider.gameObject.tag == "Pickup" ) {
-				//Debug.Log("test");
-				attackTarget.collider.gameObject.GetComponent<PickupController>().takeDamage();
-				}
+                Vector3 direction = (attackTarget.point - playerMover.transform.position).normalized;
+                enemy.UnfreezeImpacts();
+                enemy.takeDamage(direction*punchPower);
+				      }
+				      else if (attackTarget.collider.gameObject.tag == "Pickup" ) {
+				        //Debug.Log("test");
+				        attackTarget.collider.gameObject.GetComponent<PickupController>().takeDamage();
+				      }
             }
             
             attacked = true;
