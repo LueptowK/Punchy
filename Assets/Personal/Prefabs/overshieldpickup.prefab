@@ -105,4 +105,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
+  pickupSpawner: {fileID: 0}
   OvershieldAmount: 25

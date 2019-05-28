@@ -96,6 +96,7 @@ public class PickupSpawner : MonoBehaviour
     {
         Vector3 pos = tether.transform.position;
         GameObject pickup = Instantiate(GrabPickupType(), pos - new Vector3(0, 5 / 4, 0), tether.transform.rotation, pickupsParent.transform);
+        pickup.SetActive(true);
         spawnTimer = 0;
         pickups.Add(pickup); //
         pickupCount++;
@@ -106,7 +107,7 @@ public class PickupSpawner : MonoBehaviour
     {
         pickupCount--;
         pickups.Remove(obj);
-        Destroy(obj);
+        //Destroy(obj);
 
         //locations.Remove(obj.transform.position + new Vector3(0, 5/4, 0));
     }
