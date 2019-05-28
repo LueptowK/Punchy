@@ -289,7 +289,7 @@ public class CylinderEnemyController : EnemyController
         transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, laserRotationLerp);
         */
 
-        if (firing && fireTimer >= laserFiringTime)
+        if (enemyMover.isGrounded && firing && fireTimer >= laserFiringTime)
         {
             EndAttack();
             if (nav.enabled) nav.isStopped = false;
