@@ -498,10 +498,19 @@ public class PlayerValues : ActorValues
     {
         [SerializeField] private float groundPoundHopSpeed;
         [SerializeField] private float gravityMultiplier;
+        [SerializeField] private float speedMinimumToPound;
         [SerializeField] private float speedMaximum;
         [SerializeField] private float physicsMaxForce;
         [SerializeField] private ParticleSystem groundPoundParticles;
         [SerializeField] private AudioClip groundPoundSound;
+
+        public float SpeedMinimumToPound
+        {
+            get
+            {
+                return speedMinimumToPound;
+            }
+        }
 
         public ParticleSystem GroundPoundParticles
         {

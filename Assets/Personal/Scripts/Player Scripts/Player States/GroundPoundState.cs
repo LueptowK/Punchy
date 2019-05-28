@@ -10,6 +10,7 @@ public class GroundPoundState : PlayerState
     bool grounded = false;
     float gravityMultiplier;
     float speedMaximum;
+    float speedMinimumToPound;
     float physicsMaxForce;
     float height;
     bool charging;
@@ -26,6 +27,7 @@ public class GroundPoundState : PlayerState
         groundPoundHopSpeed = playerMover.playerValues.groundPoundStateValues.GroundPoundHopSpeed;
         gravityMultiplier = playerMover.playerValues.groundPoundStateValues.GravityMultiplier;
         speedMaximum = playerMover.playerValues.groundPoundStateValues.SpeedMaximum;
+        speedMinimumToPound = playerMover.playerValues.groundPoundStateValues.SpeedMinimumToPound;
         physicsMaxForce = playerMover.playerValues.groundPoundStateValues.PhysicsMaxForce;
         groundPoundParticles = playerMover.playerValues.groundPoundStateValues.GroundPoundParticles;
         groundPoundSound = playerMover.playerValues.groundPoundStateValues.GroundPoundSound;
@@ -76,10 +78,10 @@ public class GroundPoundState : PlayerState
     {
 
         float speed = -move.y;
-        if (speed > 25)
+        if (speed > speedMinimumToPound)
         {
-            float damageRange = (speed - 20)/3;
-            float physicsRange = (speed - 20)/2;
+            float damageRange = (speed - speedMinimumToPound) /3;
+            float physicsRange = (speed - speedMinimumToPound) /2;
             DealPoundDamage(damageRange);
             //DealPoundImpacts(physicsRange);
             DealPoundPhysics(physicsRange);
@@ -111,9 +113,8 @@ public class GroundPoundState : PlayerState
             //hit.gameObject.GetComponent<EnemyController>().takeDamage(hit.gameObject.transform.position);
 
             
-            Vector3 direction = playerMover.transform.position - (hit.gameObject.transform.position + Vector3.down * height / 2);
-            //Dividing the direction once gives the unit vector, again reduces the force inversely with distance
-            hit.gameObject.GetComponent<EnemyController>().takeDamage(direction);
+            Vector3 direction = (hit.gameObject.transform.position + Vector3.down * height / 2) -playerMover.transform.position;
+            hit.gameObject.GetComponent<EnemyController>().takeDamage(direction/direction.sqrMagnitude);
             
         }
     }
