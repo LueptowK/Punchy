@@ -88,6 +88,7 @@ public class CylinderEnemyController : EnemyController
     // Update is called once per frame
     protected override void Update()
     {
+
         if (isVisible())
         {
             nav.speed = defaultSpeed;
@@ -324,7 +325,17 @@ public class CylinderEnemyController : EnemyController
     {
         transform.LookAt(player.gameObject.transform.position);
         GameObject bullet = Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
-        bullet.GetComponent<Projectile>().Fire(this.transform.position, player.transform.position, bulletSpeed, bulletDamage, bulletForce);
+        Vector3 firstOrderIntercept = TargetPredictor.DumbFirstOrderIntercept(
+            this.gameObject.transform.position, 
+            nav.velocity, 
+            bulletSpeed, 
+            player.transform.position, 
+            player.GetComponent<CharacterController>().velocity);
+        //Debug.Log("attempting to fire towards " + firstOrderIntercept);
+        // Debug.Log("Enemy velocity is" + nav.velocity);
+        
+       bullet.GetComponent<Projectile>().Fire(this.transform.position, firstOrderIntercept, bulletSpeed, bulletDamage, bulletForce);
+      // bullet.GetComponent<Projectile>().Fire(this.transform.position, player.transform.position, bulletSpeed, bulletDamage, bulletForce);
 
         EndAttack();
     }
