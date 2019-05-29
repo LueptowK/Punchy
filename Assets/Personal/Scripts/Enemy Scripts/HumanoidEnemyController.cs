@@ -25,6 +25,7 @@ public class HumanoidEnemyController : EnemyController {
 	private float timer;
 	bool dead;
     bool exploding;
+    public bool isExploding { get { return exploding; } }
     float maxDeadTime = 3;
     float defaultSpeed;
     bool runningAway;
