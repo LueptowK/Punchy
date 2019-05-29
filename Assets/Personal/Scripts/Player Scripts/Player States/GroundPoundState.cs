@@ -122,8 +122,9 @@ public class GroundPoundState : PlayerState
             float maxRange = (speedMaximum - speedMinimumToPound) / 2;
             float forceMultiplier = physicsMaxForce * range / maxRange;
             Vector3 direction = (hit.gameObject.transform.position + Vector3.down * height / 2) - playerMover.transform.position;
+            float knockbackModifier = hit.gameObject.GetComponent<EnemyValues>().generalValues.KnockbackModifier;
             //adds an impulse relative to how close they are to the center of the impact
-            hit.gameObject.GetComponent<ImpactReceiver>().AddImpact(direction, forceMultiplier);
+            hit.gameObject.GetComponent<ImpactReceiver>().AddImpact(direction, forceMultiplier * knockbackModifier);
         }
     }
 
