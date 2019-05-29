@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.4500295, g: 0.50008404, b: 0.5755013, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -88,7 +88,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 37dbe680b1417674dae4c6275b059855,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -2315,6 +2316,11 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 297547910}
+    - target: {fileID: 3293244435944367796, guid: 7123117918a8f964993be52c6c58a263,
+        type: 3}
+      propertyPath: energyBallsParent
+      value: 
+      objectReference: {fileID: 1475018072}
     - target: {fileID: 3293244435944367793, guid: 7123117918a8f964993be52c6c58a263,
         type: 3}
       propertyPath: m_Enabled
@@ -15806,6 +15812,36 @@ Transform:
   m_Father: {fileID: 2110891202}
   m_RootOrder: 43
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1475018072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1475018073}
+  m_Layer: 0
+  m_Name: EnergyBalls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1475018073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475018072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.293068, y: 2.5333347, z: -14.444496}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1487758905
 GameObject:
   m_ObjectHideFlags: 0
@@ -20917,6 +20953,11 @@ PrefabInstance:
       propertyPath: firingFrequencyRange
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3293244435944367803, guid: 7123117918a8f964993be52c6c58a263,
+        type: 3}
+      propertyPath: m_Speed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3293244435944367793, guid: 7123117918a8f964993be52c6c58a263,
         type: 3}
       propertyPath: enemyAttackTokenPool
@@ -20941,11 +20982,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3293244435944367803, guid: 7123117918a8f964993be52c6c58a263,
-        type: 3}
-      propertyPath: m_Speed
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3293244435944367793, guid: 7123117918a8f964993be52c6c58a263, type: 3}
@@ -21239,7 +21275,7 @@ PrefabInstance:
     - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
         type: 3}
       propertyPath: tokenPoolsEnemyTypes.Array.data[3].tokenGrowthPerAttackType.Array.data[0]
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
         type: 3}
@@ -21259,7 +21295,7 @@ PrefabInstance:
     - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
         type: 3}
       propertyPath: spawnDifficultyValues.baseSpawnLimits.Array.data[0]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
         type: 3}
