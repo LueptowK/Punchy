@@ -51,8 +51,13 @@ public class ChargeAttackState : PlayerState
     }
 
     public override void Enter()
-    {
-        attackTarget.collider.gameObject.GetComponent<EnemyController>().Freeze();
+    {	
+		if ( attackTarget.collider.gameObject.tag == "Enemy"){
+			attackTarget.collider.gameObject.GetComponent<EnemyController>().Freeze();
+			} /*
+		else if (attackTarget.collider.gameObject.tag == "Pickup" ) {
+		attackTarget.collider.gameObject.GetComponent<PickupController>().freeze();
+		} */
         Vector3 attackTargetPosition = attackTarget.collider.gameObject.transform.position;
         initialPosition = playerMover.transform.position;
         moveTarget = attackTargetPosition - Vector3.Normalize(attackTargetPosition - initialPosition)*endingDistance;
@@ -86,11 +91,18 @@ public class ChargeAttackState : PlayerState
         {
             playerMover.Move(Vector3.zero);
             if (attackTarget.collider != null)
-            {
-                EnemyController enemy = attackTarget.collider.gameObject.GetComponent<EnemyController>();
-                Vector3 direction = (attackTarget.point - playerMover.transform.position).normalized;
-                enemy.UnfreezeImpacts();
-                enemy.takeDamage(direction*punchPower);
+            {	
+				if (attackTarget.collider.gameObject.tag == "Enemy")
+                {
+                    Vector3 direction = (attackTarget.point - playerMover.transform.position).normalized;
+				    EnemyController enemy = attackTarget.collider.gameObject.GetComponent<EnemyController>();
+                    enemy.UnfreezeImpacts();
+                    enemy.takeDamage(direction*punchPower);
+				}
+				else if (attackTarget.collider.gameObject.tag == "Pickup" )
+                {
+				    attackTarget.collider.gameObject.GetComponent<PickupController>().takeDamage();
+				}
             }
             
             attacked = true;

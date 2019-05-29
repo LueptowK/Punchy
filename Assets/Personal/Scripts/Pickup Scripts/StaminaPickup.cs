@@ -7,10 +7,12 @@ public class StaminaPickup : PickupController
     [SerializeField] int StaminaAmount = 100;
 
 
-    private void OnTriggerEnter(Collider col)
+    public override void takeDamage()
     {
-        col.gameObject.GetComponent<PlayerStamina>().RegainStaminaWithoutRegen(StaminaAmount);
-        col.gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
+
+        pickupSpawner.gameObject.GetComponent<PickupSpawner>().PickedUp(gameObject);
+        pickupSpawner.gameObject.GetComponent<PlayerStamina>().RegainStaminaWithoutRegen(StaminaAmount);
+        Destroy(gameObject);
     }
 
 }
