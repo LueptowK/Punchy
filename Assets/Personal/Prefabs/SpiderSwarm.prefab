@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -36,8 +36,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -58,8 +58,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -80,8 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -102,8 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -124,8 +124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -146,8 +146,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -168,8 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -190,8 +190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -212,8 +212,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -234,8 +234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -256,8 +256,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -278,8 +278,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -300,8 +300,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -322,8 +322,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -344,8 +344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -366,8 +366,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -388,8 +388,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -410,8 +410,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -485,8 +485,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -507,8 +507,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -529,8 +529,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -551,8 +551,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -573,8 +573,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -595,8 +595,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -617,8 +617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactValues:
     mass: 0.1
-    groundFriction: 0
-    airFriction: 0
+    groundFriction: 1000
+    airFriction: 1000
     recoveryImpact: 0
     bounceRatio: 0
   generalValues:
@@ -770,6 +770,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -1024,6 +1034,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -1276,6 +1296,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -1530,6 +1560,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -1782,6 +1822,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -2036,6 +2086,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -2288,6 +2348,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -2542,6 +2612,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -2794,6 +2874,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -3048,6 +3138,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -3300,6 +3400,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -3554,6 +3664,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -3807,6 +3927,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -4052,6 +4182,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 632982334, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: player
       value: 
@@ -4132,6 +4272,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -4377,6 +4527,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -4631,6 +4791,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -4879,6 +5049,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -5133,6 +5313,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -5385,6 +5575,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -5639,6 +5839,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -5891,6 +6101,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -6145,6 +6365,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -6398,6 +6628,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -6642,6 +6882,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
@@ -6903,6 +7153,16 @@ PrefabInstance:
     - target: {fileID: 632982336, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.groundFriction
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990809188573923028, guid: 55c3e1a3eeb72124eaa61e4379d8177c,
+        type: 3}
+      propertyPath: impactValues.airFriction
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 230790882, guid: 55c3e1a3eeb72124eaa61e4379d8177c, type: 3}
       propertyPath: m_Layer
