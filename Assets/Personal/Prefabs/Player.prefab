@@ -475,7 +475,7 @@ MonoBehaviour:
     staminaRegain: 5
     explodeRadius: 1
     explodePower: 50
-    punchPower: 1
+    punchPower: 30
   dashStateValues:
     dashTime: 0.16666667
     dashSpeed: 50

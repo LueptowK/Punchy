@@ -98,7 +98,9 @@ public class ChargeAttackState : PlayerState
 				    EnemyController enemy = attackTarget.collider.gameObject.GetComponent<EnemyController>();
                     enemy.UnfreezeImpacts();
                     enemy.takeDamage(direction*punchPower);
-				}
+                    float knockbackModifier = attackTarget.collider.gameObject.GetComponent<EnemyValues>().generalValues.KnockbackModifier;
+                    attackTarget.collider.gameObject.GetComponent<ImpactReceiver>().AddImpact(direction, punchPower * knockbackModifier);
+                }
 				else if (attackTarget.collider.gameObject.tag == "Pickup" )
                 {
 				    attackTarget.collider.gameObject.GetComponent<PickupController>().takeDamage();

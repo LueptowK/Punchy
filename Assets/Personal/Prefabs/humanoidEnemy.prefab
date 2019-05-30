@@ -1000,7 +1000,7 @@ MonoBehaviour:
   generalValues:
     healthValue: 1
     impactToDamage: 1000
-    knockbackModifier: 10
+    knockbackModifier: 1
 --- !u!1 &1919580943243380
 GameObject:
   m_ObjectHideFlags: 0

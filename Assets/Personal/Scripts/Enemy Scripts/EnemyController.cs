@@ -67,7 +67,6 @@ public abstract class EnemyController : MonoBehaviour
         }
         else
         {
-            impacter.AddImpact(direction, knockbackModifier);
             nav.enabled = false;
         }
     }
@@ -120,14 +119,20 @@ public abstract class EnemyController : MonoBehaviour
 
     protected virtual void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        //using the impact based on speed looks better since it requires 
+        //enemies to actually be in motion, but using source impact makes bounces better
         float impact = -Vector3.Dot(hit.normal, old_velocity);
+        Vector3 srcImpact = impacter.Impact;
+        
         if (impact > impactToDamage)
         {
+            takeDamage(hit.normal);
             if (hit.gameObject.layer == 9)
             {
-                hit.gameObject.GetComponent<EnemyController>().takeDamage(impact * hit.moveDirection);
+                hit.gameObject.GetComponent<EnemyController>().takeDamage(srcImpact);
+                hit.gameObject.GetComponent<ImpactReceiver>().AddImpact(srcImpact, srcImpact.magnitude);
             }
-            takeDamage(impact * hit.normal);
+            
         }
         else
         {

@@ -592,4 +592,4 @@ MonoBehaviour:
   generalValues:
     healthValue: 2
     impactToDamage: 10
-    knockbackModifier: 30
+    knockbackModifier: 1

@@ -177,8 +177,8 @@ MonoBehaviour:
     bounceRatio: 0
   generalValues:
     healthValue: 1
-    impactToDamage: 0
-    knockbackModifier: 20
+    impactToDamage: 1000
+    knockbackModifier: 1
 --- !u!143 &3375916080135372702
 CharacterController:
   m_ObjectHideFlags: 0
