@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class CylinderRepositionNode : BehaviorNode
 {
-    public CylinderRepositionNode(EnemyController enemyController) : base(enemyController)
+    public CylinderRepositionNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
     {
-        controller = enemyController;
-        children = new BehaviorNode[] {
-            new CylinderEscapeNode(controller)};
+        children = nodeChildren;
     }
 
     public override void Update()
@@ -16,8 +14,8 @@ public class CylinderRepositionNode : BehaviorNode
         base.Update();
     }
 
-    public override void FixedUpdate()
+    public override statusValues FixedUpdate()
     {
-        base.FixedUpdate();
+        return base.FixedUpdate();
     }
 }

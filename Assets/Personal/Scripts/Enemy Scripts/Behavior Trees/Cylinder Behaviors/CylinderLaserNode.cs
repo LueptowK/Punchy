@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CylinderLaserNode : BehaviorNode
 {
-    public CylinderLaserNode(EnemyController enemyController) : base(enemyController)
+    public CylinderLaserNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
     {
-        controller = enemyController;
+        children = nodeChildren;
+        context = nodeContext;
     }
 
     public override void Update()
@@ -14,8 +15,8 @@ public class CylinderLaserNode : BehaviorNode
         base.Update();
     }
 
-    public override void FixedUpdate()
+    public override statusValues FixedUpdate()
     {
-        base.FixedUpdate();
+        return base.FixedUpdate();
     }
 }

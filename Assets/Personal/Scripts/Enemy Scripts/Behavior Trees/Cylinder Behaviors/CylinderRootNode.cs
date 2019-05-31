@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class CylinderRootNode : BehaviorNode
 {
-    public CylinderRootNode(EnemyController enemyController) : base(enemyController)
+    public CylinderRootNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
     {
-        controller = enemyController;
+        children = nodeChildren;
+        context = nodeContext;
+        context.Add("root", new ContextItem<BehaviorNode>(this));
         children = new BehaviorNode[] {
-            new CylinderRepositionNode(controller),
-            new CylinderLaserNode(controller),
-            new CylinderFireballNode(controller)};
+            new CylinderRepositionNode(
+                new BehaviorNode[] {
+                    new CylinderEscapeNode(controller)}, 
+                context),
+            new CylinderLaserNode(null, nodeContext),
+            new CylinderFireballNode(null, nodeContext)};
     }
 
     public override void Update()
@@ -18,8 +23,8 @@ public class CylinderRootNode : BehaviorNode
         base.Update();
     }
 
-    public override void FixedUpdate()
+    public override statusValues FixedUpdate()
     {
-        base.FixedUpdate();
+        return base.FixedUpdate();
     }
 }

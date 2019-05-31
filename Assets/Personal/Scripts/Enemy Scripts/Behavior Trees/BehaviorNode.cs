@@ -6,11 +6,13 @@ public abstract class BehaviorNode
 {
     protected EnemyController controller;
     protected BehaviorNode[] children;
+    protected Dictionary<string, object> context;
     public enum statusValues { success, failure, running };
 
-    public BehaviorNode(EnemyController enemyController)
+    public BehaviorNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext)
     {
-        controller = enemyController;
+        children = nodeChildren;
+        context = nodeContext;
     }
 
     public virtual void Update()
@@ -30,6 +32,7 @@ public abstract class BehaviorNode
             }
             if (status == statusValues.running)
             {
+                context["currentlyRunning"] = this; 
                 return status;
             }
         }

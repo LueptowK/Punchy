@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CylinderFireballNode : BehaviorNode
+public class BehaviorAlwaysFalse : BehaviorNode
 {
-    public CylinderFireballNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
+    public BehaviorAlwaysFalse(EnemyController enemyController) : base(enemyController)
     {
-        children = nodeChildren;
-        context = nodeContext;
+        controller = enemyController;
+        children = new BehaviorNode[] {
+            new CylinderEscapeNode(controller)};
     }
 
     public override void Update()
