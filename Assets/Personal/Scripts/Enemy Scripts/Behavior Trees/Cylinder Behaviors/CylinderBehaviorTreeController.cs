@@ -9,7 +9,10 @@ public class CylinderBehaviorTreeController : EnemyController
     // Start is called before the first frame update
     protected override void Start()
     {
-        root = new CylinderRootNode(this);
+        Dictionary<string, object> treeContext = new Dictionary<string, object>();
+        treeContext.Add("mover", this);
+
+        root = new CylinderRootNode(null, treeContext);
         currentNode = root;
     }
 
