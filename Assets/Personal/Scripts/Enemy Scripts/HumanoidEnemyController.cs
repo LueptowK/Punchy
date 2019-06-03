@@ -134,7 +134,10 @@ public class HumanoidEnemyController : EnemyController {
             if ((hit.gameObject.layer == LayerMask.NameToLayer("Enemy") || hit.gameObject.layer == LayerMask.NameToLayer("Spiders"))
                 && hit.gameObject != this.gameObject)
             {
+                float distanceRatio = 1 - Vector3.Distance(hit.gameObject.transform.position, transform.position) / explodeRadius;
                 hit.gameObject.GetComponent<EnemyController>().takeDamage(hit.gameObject.transform.position);
+                knockbackModifier = hit.gameObject.GetComponent<EnemyValues>().generalValues.KnockbackModifier;
+                hit.gameObject.GetComponent<ImpactReceiver>().AddImpact(Vector3.Normalize(hit.gameObject.transform.position - transform.position), distanceRatio * explodePower * knockbackModifier);
             }
 
             if (hit.gameObject.layer == LayerMask.NameToLayer("Player"))

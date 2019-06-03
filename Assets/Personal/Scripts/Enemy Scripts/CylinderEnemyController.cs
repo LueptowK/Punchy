@@ -289,7 +289,7 @@ public class CylinderEnemyController : EnemyController
         transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, laserRotationLerp);
         */
 
-        if (firing && fireTimer >= laserFiringTime)
+        if ((nav.enabled || enemyMover.isGrounded) && firing && fireTimer >= laserFiringTime)
         {
             EndAttack();
             if (nav.enabled) nav.isStopped = false;
@@ -419,6 +419,11 @@ public class CylinderEnemyController : EnemyController
 
             //Weight inverse of trace ratio at inverseRatio*50. Perfect visibility weights 0, no visibility weights 50;
             weights[i] += (int)((1 - tethers[i].TraceRatio) * 50);
+
+            //Weight angle between vector from AI to player and vector from player to tether, such that angle over 90 degrees is unfavorable
+            float angle = (Vector3.Angle(  gameObject.transform.position - player.transform.position, 
+                                                tethers[i].gameObject.transform.position - player.transform.position));
+            weights[i] += angle > 90 ? (int)angle - 90 : 0;
 
             if (weights[i] < minWeight)
             {

@@ -10,6 +10,7 @@ public class GroundPoundState : PlayerState
     bool grounded = false;
     float gravityMultiplier;
     float speedMaximum;
+    float speedMinimumToPound;
     float physicsMaxForce;
     float height;
     bool charging;
@@ -26,6 +27,7 @@ public class GroundPoundState : PlayerState
         groundPoundHopSpeed = playerMover.playerValues.groundPoundStateValues.GroundPoundHopSpeed;
         gravityMultiplier = playerMover.playerValues.groundPoundStateValues.GravityMultiplier;
         speedMaximum = playerMover.playerValues.groundPoundStateValues.SpeedMaximum;
+        speedMinimumToPound = playerMover.playerValues.groundPoundStateValues.SpeedMinimumToPound;
         physicsMaxForce = playerMover.playerValues.groundPoundStateValues.PhysicsMaxForce;
         groundPoundParticles = playerMover.playerValues.groundPoundStateValues.GroundPoundParticles;
         groundPoundSound = playerMover.playerValues.groundPoundStateValues.GroundPoundSound;
@@ -76,12 +78,12 @@ public class GroundPoundState : PlayerState
     {
 
         float speed = -move.y;
-        if (speed > 25)
+        if (speed > speedMinimumToPound)
         {
-            float damageRange = (speed - 20)/3;
-            float physicsRange = (speed - 20)/2;
+            float damageRange = (speed - speedMinimumToPound) /3;
+            float physicsRange = (speed - speedMinimumToPound) /2;
             DealPoundDamage(damageRange);
-            //DealPoundImpacts(physicsRange);
+            DealPoundImpacts(physicsRange);
             DealPoundPhysics(physicsRange);
             groundPoundParticles.Play();
             audioSource.PlayOneShot(groundPoundSound);
@@ -108,13 +110,7 @@ public class GroundPoundState : PlayerState
         Collider[] colliders = Physics.OverlapSphere(playerMover.transform.position, range, enemyMask);
         foreach (Collider hit in colliders)
         {
-            //hit.gameObject.GetComponent<EnemyController>().takeDamage(hit.gameObject.transform.position);
-
-            
-            Vector3 direction = playerMover.transform.position - (hit.gameObject.transform.position + Vector3.down * height / 2);
-            //Dividing the direction once gives the unit vector, again reduces the force inversely with distance
-            hit.gameObject.GetComponent<EnemyController>().takeDamage(direction);
-            
+            hit.gameObject.GetComponent<EnemyController>().takeDamage(Vector3.zero);
         }
     }
 
@@ -123,10 +119,12 @@ public class GroundPoundState : PlayerState
         Collider[] colliders = Physics.OverlapSphere(playerMover.transform.position, range, enemyMask);
         foreach (Collider hit in colliders)
         {
-            float forceMultiplier = physicsMaxForce / range;
+            float maxRange = (speedMaximum - speedMinimumToPound) / 2;
+            float forceMultiplier = physicsMaxForce * range / maxRange;
+            Vector3 direction = (hit.gameObject.transform.position + Vector3.down * height / 2) - playerMover.transform.position;
+            float knockbackModifier = hit.gameObject.GetComponent<EnemyValues>().generalValues.KnockbackModifier;
             //adds an impulse relative to how close they are to the center of the impact
-            hit.gameObject.GetComponent<ImpactReceiver>().AddImpact(hit.gameObject.transform.position - playerMover.transform.position,
-                forceMultiplier * (Vector3.Distance(hit.gameObject.transform.position, playerMover.transform.position)));
+            hit.gameObject.GetComponent<ImpactReceiver>().AddImpact(direction, forceMultiplier * knockbackModifier);
         }
     }
 

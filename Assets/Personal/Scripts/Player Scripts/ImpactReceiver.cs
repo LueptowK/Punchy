@@ -39,6 +39,13 @@ public class ImpactReceiver : MonoBehaviour {
         impact += direction.normalized * force / mass;
         impactActive = true;
     }
+    public Vector3 Impact
+    {
+        get
+        {
+            return impact;
+        }
+    }
 
     public void Reflect(Vector3 normal)
     {

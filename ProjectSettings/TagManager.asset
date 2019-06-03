@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Hitbox
   - Pickup
+  - EnergyBall
   layers:
   - Default
   - TransparentFX

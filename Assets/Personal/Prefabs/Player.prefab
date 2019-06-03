@@ -440,6 +440,7 @@ MonoBehaviour:
     groundFriction: 5
     airFriction: 5
     recoveryImpact: 1
+    bounceRatio: 0
   chargeValues:
     chargeTimeout: 1.5
     timeToCharge: 0.5
@@ -474,7 +475,7 @@ MonoBehaviour:
     staminaRegain: 5
     explodeRadius: 1
     explodePower: 50
-    punchPower: 1
+    punchPower: 30
   dashStateValues:
     dashTime: 0.16666667
     dashSpeed: 50
@@ -483,7 +484,8 @@ MonoBehaviour:
   groundPoundStateValues:
     groundPoundHopSpeed: 20
     gravityMultiplier: 10
-    speedMaximum: 35
+    speedMinimumToPound: 15
+    speedMaximum: 50
     physicsMaxForce: 40
     groundPoundParticles: {fileID: 3627851384389572451}
     groundPoundSound: {fileID: 8300000, guid: 694d657eeb224c34bbdc927c15cc5e7f, type: 3}
