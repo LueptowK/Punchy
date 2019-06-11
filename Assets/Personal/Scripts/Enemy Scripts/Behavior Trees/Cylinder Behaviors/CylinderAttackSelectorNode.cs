@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DecoratorAlwaysFail : BehaviorNode
+public class CylinderAttackSelectorNode : BehaviorNode
 {
-    public DecoratorAlwaysFail(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
+    public CylinderAttackSelectorNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
     {
         children = nodeChildren;
-        context = nodeContext;
     }
 
     public override void Update()
@@ -17,6 +16,6 @@ public class DecoratorAlwaysFail : BehaviorNode
 
     public override statusValues FixedUpdate()
     {
-        return statusValues.failure;
+        return base.FixedUpdate();
     }
 }

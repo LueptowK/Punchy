@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CylinderRepositionNode : BehaviorNode
+public class CylinderMoveToTetherNode : BehaviorNode
 {
-    public CylinderRepositionNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
+    public CylinderMoveToTetherNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
     {
         children = nodeChildren;
     }

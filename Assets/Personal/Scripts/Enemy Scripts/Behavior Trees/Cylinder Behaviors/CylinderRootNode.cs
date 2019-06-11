@@ -8,13 +8,50 @@ public class CylinderRootNode : BehaviorNode
     {
         context = nodeContext;
         context.Add("root", new ContextItem<BehaviorNode>(this));
-        children = new BehaviorNode[] {
-            new CylinderRepositionNode(
-                new BehaviorNode[] {
-                    new CylinderEscapeNode(null, nodeContext)}, 
-                context),
-            new CylinderLaserNode(null, nodeContext),
-            new CylinderFireballNode(null, nodeContext)};
+
+        
+        BehaviorNode attackSelector = new CylinderAttackSelectorNode(
+            new BehaviorNode[]
+            {
+                new CylinderFireballNode(null, nodeContext),
+                new CylinderLaserNode(null, nodeContext)
+            },
+            nodeContext);
+
+        BehaviorNode moveSequence = new SequenceNode(
+                new BehaviorNode[]
+                {
+                    new CylinderCheckDangerNode(new BehaviorNode[]
+                    {
+                        new CylinderEscapeNode(null, nodeContext)
+                    },
+                    nodeContext),
+                    new CylinderCheckTetherNullNode(new BehaviorNode[]
+                    {
+                        new CylinderFindTetherNode(null, nodeContext)
+                    },
+                    nodeContext),
+                    new DecoratorAlwaysFail(new BehaviorNode[]
+                    {
+                        new CylinderMoveToTetherNode(null, nodeContext)
+                    }, 
+                    nodeContext)
+                },
+                nodeContext);
+
+        BehaviorNode attackSequence = new SequenceNode(
+                new BehaviorNode[]
+                {
+                    new DecoratorInverter(new BehaviorNode[] 
+                    {
+                        new CylinderCheckTokenNode(new BehaviorNode[] {attackSelector}, nodeContext)
+                    },
+                    nodeContext),
+                    new CylinderGetTokenNode(new BehaviorNode[] {attackSelector}, nodeContext)
+                },
+                nodeContext);
+
+        children = new BehaviorNode[] {moveSequence, attackSequence};
     }
 
     public override void Update()
