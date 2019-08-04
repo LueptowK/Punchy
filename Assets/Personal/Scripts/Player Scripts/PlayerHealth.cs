@@ -24,6 +24,9 @@ public class PlayerHealth : MonoBehaviour
     AudioClip hitSound;
     private float overshieldMax;
     private UnityAction<string> pauseListener;
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+    private bool devInvulnerable;
+#endif
 
     private void Awake()
     {
@@ -87,6 +90,13 @@ public class PlayerHealth : MonoBehaviour
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
         damaged = false;
+
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+        if (Input.GetButtonDown("Dev"))
+        {
+            ToggleDevInvulnerable();
+        }
+#endif
     }
 
     public void TakeDamage(int damage, Vector3 direction, float force)
@@ -117,7 +127,27 @@ public class PlayerHealth : MonoBehaviour
 
             //moveDamageIndicator(direction);
         }
+
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+        if (devInvulnerable)
+        {
+            health = maxHealth;
+            healthBar.fillAmount = 1;
+        }
+#endif
     }
+
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+    private void ToggleDevInvulnerable()
+    {
+        devInvulnerable = !devInvulnerable;
+        if (devInvulnerable)
+        {
+            health = maxHealth;
+            healthBar.fillAmount = 1;
+        }
+    }
+#endif
 
     public void GainOvershield (float overshieldgain)
     {
