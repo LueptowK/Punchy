@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAttackTokenPool : MonoBehaviour {
     SpawnManager spawnManager;
-    [SerializeField] EnemyTypeTokens[] enemyTypes;
+    EnemyTypeTokens[] enemyTypes;
     DifficultyManager difficultyManager;
     DifficultyValues difficultyValues;
 
@@ -17,9 +17,10 @@ public class EnemyAttackTokenPool : MonoBehaviour {
         //might need to be done differently? 
         difficultyValues = difficultyManager.DifficultyValues;
 
-        foreach (EnemyTypeTokens EnemyType in enemyTypes)
+        enemyTypes = difficultyValues.TokenPoolsEnemyTypes;
+        foreach(EnemyTypeTokens enemyType in enemyTypes)
         {
-            EnemyType.Start(difficultyValues);
+            enemyType.Start();
         }
     }
 
@@ -56,7 +57,7 @@ public class EnemyAttackTokenPool : MonoBehaviour {
 
         //Should this be implemented as an array of lists?
     [System.Serializable]
-    class EnemyTypeTokens : object
+    public class EnemyTypeTokens : object
     {
         [SerializeField] SpawnManager.EnemyType enemyType;
         [SerializeField] int[] initialTokensPerAttackType;
@@ -69,12 +70,8 @@ public class EnemyAttackTokenPool : MonoBehaviour {
         List<Token>[] coolingTokens;
         List<Token>[] takenTokens;
 
-        public void Start(DifficultyValues values)
+        public void Start()
         {
-            initialTokensPerAttackType = values.TokenPoolsEnemyTypes[(int)enemyType].InitialTokensPerAttackType;
-            tokenGrowthPerAttackType = values.TokenPoolsEnemyTypes[(int)enemyType].TokenGrowthPerAttackType;
-            attackTypeCooldowns = values.TokenPoolsEnemyTypes[(int)enemyType].AttackTypeCooldowns;
-
             availableTokens = new List<Token>[initialTokensPerAttackType.Length];
             coolingTokens = new List<Token>[initialTokensPerAttackType.Length];
             takenTokens = new List<Token>[initialTokensPerAttackType.Length];

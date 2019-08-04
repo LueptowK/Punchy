@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DifficultyValues : MonoBehaviour
 {
-    [SerializeField] TokenPoolsValues[] tokenPoolsEnemyTypes;
+    [SerializeField] EnemyAttackTokenPool.EnemyTypeTokens[] tokenPoolsEnemyTypes;
     [SerializeField] SpawnValues spawnDifficultyValues;
     [SerializeField] bool isDefaultValues;
 
@@ -20,7 +20,7 @@ public class DifficultyValues : MonoBehaviour
         return this;
     }
 
-    public TokenPoolsValues[] TokenPoolsEnemyTypes
+    public EnemyAttackTokenPool.EnemyTypeTokens[] TokenPoolsEnemyTypes
     {
         get
         {
@@ -63,47 +63,6 @@ public class DifficultyValues : MonoBehaviour
             get
             {
                 return spawnLimitsGrowth;
-            }
-        }
-    }
-
-    [System.Serializable]
-    public class TokenPoolsValues : object
-    {
-        [SerializeField] SpawnManager.EnemyType enemyType;
-        [SerializeField] int[] initialTokensPerAttackType;
-        [SerializeField] float[] tokenGrowthPerAttackType;
-        [SerializeField] float[] attackTypeCooldowns;
-
-        public SpawnManager.EnemyType EnemyType
-        {
-            get
-            {
-                return enemyType;
-            }
-        }
-
-        public int[] InitialTokensPerAttackType
-        {
-            get
-            {
-                return initialTokensPerAttackType;
-            }
-        }
-
-        public float[] TokenGrowthPerAttackType
-        {
-            get
-            {
-                return tokenGrowthPerAttackType;
-            }
-        }
-
-        public float[] AttackTypeCooldowns
-        {
-            get
-            {
-                return attackTypeCooldowns;
             }
         }
     }
