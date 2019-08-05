@@ -6,16 +6,17 @@ using UnityScript.Steps;
 
 public class BirdieEnemyController : EnemyController
 {
-    private enum enemyState { movingState, tetheredState };
+    private enum enemyState { movingState, divingState, attackingState };
     private enemyState state;
     private TethersTracker tetherTracker;
     private GameObject tether;
     private float tetherRadius;
     //EnemyAttackTokenPool.Token token;
-    float defaultSpeed;
     float runAwayDistance;
     Vector3 destination;
     EnemyAttackTokenPool.Token token;
+    [SerializeField] float steeringForce;
+    [SerializeField] float defaultSpeed;
     [SerializeField] int scoreValue;
     private float stateTimer;
     private float reevaluateTetherTime;
@@ -30,7 +31,7 @@ public class BirdieEnemyController : EnemyController
         base.Start();
 
         nav = GetComponent<NavMeshAgent>();
-        defaultSpeed = nav.speed;
+        nav.enabled = false;
         tetherTracker = player.gameObject.GetComponentInChildren<TethersTracker>();
         enemyAttackTokenPool = player.GetComponentInChildren<EnemyAttackTokenPool>();
         type = SpawnManager.EnemyType.Birdie;
@@ -47,61 +48,41 @@ public class BirdieEnemyController : EnemyController
     // Update is called once per frame
     protected override void FixedUpdate()
     {
-        if (!dead && nav.enabled)
+        if (!dead)
         {
-            MoveToTether();
             stateTimer += Time.unscaledDeltaTime;
             switch (state)
             {
                 case enemyState.movingState:
-                    state = MoveToTether();
-                    break;
-                case enemyState.tetheredState:
-                    state = TetheredBehavior();
+                    state = MoveToPlayer();
                     break;
             }
         }
     }
 
-    private enemyState MoveToTether()
+    private enemyState MoveToPlayer()
     {
-        nav.speed = defaultSpeed * 1.5f; // run faster when trying to get to tether
-        if (Vector3.Distance(tether.transform.position, this.transform.position) <= tetherRadius)
+        Vector3 birdieToAboveTarget = player.transform.position + Vector3.up * 10 - this.transform.position;
+        Vector3 xzBirdieToAboveTarget = new Vector3(birdieToAboveTarget.x, 0, birdieToAboveTarget.z);
+        Vector3 birdieToClosestAttackPoint = birdieToAboveTarget - 10 * Vector3.Normalize(xzBirdieToAboveTarget);
+        if (Vector3.Magnitude(birdieToClosestAttackPoint) < defaultSpeed)
         {
-            stateTimer = 0;
-            return enemyState.tetheredState;
+            Debug.Log("Close to strike!");
         }
         else
         {
-            nav.SetDestination(destination);
-            return enemyState.movingState;
-        }
-    }
+            Vector3 desiredDirection = Vector3.Normalize(birdieToClosestAttackPoint);
+            Vector3 steeringFull = desiredDirection - Vector3.Normalize(this.old_velocity);
+            Vector3 steeringLimited = Vector3.ClampMagnitude(steeringFull, steeringForce);
 
-    private enemyState TetheredBehavior()
-    {
-        nav.speed = defaultSpeed;
-        //if (fireTimer >= firingFrequency) FireProjectile();
-        // if player gets too close re-evaluate or wait the appropriate amount of time to evaluate next tether
-        if (playerTooClose || stateTimer >= reevaluateTetherTime)
-        {
-            GameObject newTether = this.findBestTether();
-            if (newTether == tether)
-            {
-                nav.SetDestination(this.FindNewPositionInTether());
-                return enemyState.tetheredState;
-            }
-            else
-            {
-                tether = newTether;
-                tetherRadius = tether.GetComponent<TetherController>().Radius;
-                destination = FindNewPositionInTether();
-                return enemyState.movingState;
-            }
+            Vector3 velocity = defaultSpeed * (Vector3.Normalize(Vector3.Normalize(this.old_velocity) + steeringLimited));
+            this.old_velocity = velocity;
+            this.transform.rotation = Quaternion.LookRotation(velocity);
+            enemyMover.Move(velocity);
         }
-        return enemyState.tetheredState;
-    }
 
+        return enemyState.movingState;
+    }
 
     private Vector3 FindNewPositionInTether()
     {

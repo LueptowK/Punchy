@@ -4562,6 +4562,8 @@ MonoBehaviour:
   nav: {fileID: 445113672}
   spawnManager: {fileID: 297547915}
   playerCamera: {fileID: 297547910}
+  steeringForce: 0
+  defaultSpeed: 0.1
   scoreValue: 10
 --- !u!1 &447270144
 GameObject:
