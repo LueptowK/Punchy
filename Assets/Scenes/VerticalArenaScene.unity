@@ -3152,10 +3152,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
       propertyPath: enemyTypes.Array.data[3].initialTokensPerAttackType.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -3165,6 +3161,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
       propertyPath: enemyTypes.Array.data[3].attackTypeCooldowns.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
+      propertyPath: enemyTypes.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
+      propertyPath: enemyTypes.Array.data[4].initialTokensPerAttackType.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
+      propertyPath: enemyTypes.Array.data[4].tokenGrowthPerAttackType.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
+      propertyPath: enemyTypes.Array.data[4].attackTypeCooldowns.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
@@ -3182,6 +3194,22 @@ PrefabInstance:
     - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
       propertyPath: enemyTypes.Array.data[3].tokenGrowthPerAttackType.Array.data[0]
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
+      propertyPath: enemyTypes.Array.data[4].enemyType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
+      propertyPath: enemyTypes.Array.data[4].initialTokensPerAttackType.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
+      propertyPath: enemyTypes.Array.data[4].tokenGrowthPerAttackType.Array.data[0]
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
+      propertyPath: enemyTypes.Array.data[4].attackTypeCooldowns.Array.data[0]
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 744898441, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
       propertyPath: tokenPool
@@ -4562,8 +4590,14 @@ MonoBehaviour:
   nav: {fileID: 445113672}
   spawnManager: {fileID: 297547915}
   playerCamera: {fileID: 297547910}
-  steeringForce: 0
-  defaultSpeed: 0.1
+  steeringMaxWandering: 0.1
+  steeringMaxPreparing: 0.2
+  steeringMaxDiving: 0.2
+  steeringMaxAttacking: 0.03
+  steeringMaxReturning: 0.03
+  steeringMaxDodging: 0.1
+  dodgeDistance: 5
+  defaultSpeed: 0.3
   scoreValue: 10
 --- !u!1 &447270144
 GameObject:
@@ -21385,6 +21419,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
+        type: 3}
+      propertyPath: spawnDifficultyValues.baseSpawnLimits.Array.data[4]
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 137d5cac96d69e04abc091b1bfceeda9, type: 3}

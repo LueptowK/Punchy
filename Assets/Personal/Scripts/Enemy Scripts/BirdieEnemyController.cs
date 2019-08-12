@@ -6,16 +6,18 @@ using UnityScript.Steps;
 
 public class BirdieEnemyController : EnemyController
 {
-    private enum enemyState { movingState, divingState, attackingState };
+    private enum enemyState { wanderingState, preparingState, divingState, attackingState, returningState, dodgingState};
     private enemyState state;
-    private TethersTracker tetherTracker;
-    private GameObject tether;
-    private float tetherRadius;
-    //EnemyAttackTokenPool.Token token;
-    float runAwayDistance;
+    private bool hitPlayer;
     Vector3 destination;
     EnemyAttackTokenPool.Token token;
-    [SerializeField] float steeringForce;
+    [SerializeField] float steeringMaxWandering;
+    [SerializeField] float steeringMaxPreparing;
+    [SerializeField] float steeringMaxDiving;
+    [SerializeField] float steeringMaxAttacking;
+    [SerializeField] float steeringMaxReturning;
+    [SerializeField] float steeringMaxDodging;
+    [SerializeField] float dodgeDistance;
     [SerializeField] float defaultSpeed;
     [SerializeField] int scoreValue;
     private float stateTimer;
@@ -32,15 +34,10 @@ public class BirdieEnemyController : EnemyController
 
         nav = GetComponent<NavMeshAgent>();
         nav.enabled = false;
-        tetherTracker = player.gameObject.GetComponentInChildren<TethersTracker>();
         enemyAttackTokenPool = player.GetComponentInChildren<EnemyAttackTokenPool>();
         type = SpawnManager.EnemyType.Birdie;
-        state = enemyState.movingState;
-        tether = this.findBestTether();
-        destination = FindNewPositionInTether();
-        tetherRadius = tether.GetComponent<TetherController>().Radius;
+        state = enemyState.wanderingState;
         dead = false;
-        runAwayDistance = 20f;
         stateTimer = 0f;
         reevaluateTetherTime = 0f;
     }
@@ -51,110 +48,178 @@ public class BirdieEnemyController : EnemyController
         if (!dead)
         {
             stateTimer += Time.unscaledDeltaTime;
+            if (this.old_velocity != Vector3.zero)
+            {
+                RaycastHit hit;
+                Physics.Raycast(this.transform.position, this.old_velocity, out hit, Mathf.Infinity, LayerMask.GetMask("Default"));
+                if (hit.distance < dodgeDistance)
+                {
+                    Debug.Log("Dodging " + stateTimer);
+                    state = enemyState.dodgingState;
+                }
+            }
             switch (state)
             {
-                case enemyState.movingState:
+                case enemyState.wanderingState:
+                    state = Wander();
+                    break;
+                case enemyState.preparingState:
                     state = MoveToPlayer();
                     break;
+                case enemyState.divingState:
+                    state = DiveDown();
+                    break;
+                case enemyState.attackingState:
+                    state = AttackPlayer();
+                    break;
+                case enemyState.returningState:
+                    state = ReturnUp();
+                    break;
+
+                case enemyState.dodgingState:
+                    state = Dodge();
+                    break;
+
             }
+        }
+    }
+    private void moveWithSteering(Vector3 targetDirection, float steeringForce)
+    {
+        Vector3 desiredDirection = Vector3.Normalize(targetDirection);
+        Vector3 currentDirection = Vector3.Normalize(this.old_velocity);
+        Vector3 steeringFull = desiredDirection - currentDirection;
+        Vector3 steeringLimited = Vector3.ClampMagnitude(steeringFull, steeringForce);
+
+        Vector3 velocity = defaultSpeed * (Vector3.Normalize(currentDirection + steeringLimited));
+        this.old_velocity = velocity;
+        this.transform.rotation = Quaternion.LookRotation(velocity);
+        enemyMover.Move(velocity);
+    }
+    
+    private enemyState Wander()
+    {
+        //moveWithSteering(this.old_velocity, steeringMaxWandering);
+        token = enemyAttackTokenPool.RequestToken(this.gameObject, 0);
+        if (token != null)
+        {
+            return enemyState.preparingState;
+        }
+        else
+        {
+            Dodge();
+            return enemyState.wanderingState;
         }
     }
 
     private enemyState MoveToPlayer()
     {
-        Vector3 birdieToAboveTarget = player.transform.position + Vector3.up * 10 - this.transform.position;
+        Vector3 birdieToAboveTarget = player.transform.position + Vector3.up * 15 - this.transform.position;
         Vector3 xzBirdieToAboveTarget = new Vector3(birdieToAboveTarget.x, 0, birdieToAboveTarget.z);
-        Vector3 birdieToClosestAttackPoint = birdieToAboveTarget - 10 * Vector3.Normalize(xzBirdieToAboveTarget);
+        Vector3 birdieToClosestAttackPoint = birdieToAboveTarget - 20 * Vector3.Normalize(xzBirdieToAboveTarget);
         if (Vector3.Magnitude(birdieToClosestAttackPoint) < defaultSpeed)
         {
             Debug.Log("Close to strike!");
+            return enemyState.divingState;
+        }
+        moveWithSteering(birdieToClosestAttackPoint, steeringMaxPreparing);
+        return enemyState.preparingState;
+    }
+
+    private enemyState DiveDown()
+    {
+        if (this.old_velocity.normalized.y < -0.99)
+        {
+            Debug.Log("Finished dive");
+            return enemyState.attackingState;
+        }
+        moveWithSteering(Vector3.down, steeringMaxDiving);
+        return enemyState.divingState;
+    }
+
+    private enemyState AttackPlayer()
+    {
+        Vector3 birdieToTarget = player.transform.position + Vector3.up - this.transform.position;
+
+        if(Vector3.Dot(birdieToTarget,this.old_velocity)<0)
+        {
+            Debug.Log("Returning");
+            enemyAttackTokenPool.ReturnToken(this.type, token);
+            return enemyState.returningState;
+        }
+
+        moveWithSteering(birdieToTarget, steeringMaxAttacking);
+        if (hitPlayer)
+        {
+            enemyAttackTokenPool.ReturnToken(this.type, token);
+            return enemyState.returningState;
         }
         else
         {
-            Vector3 desiredDirection = Vector3.Normalize(birdieToClosestAttackPoint);
-            Vector3 steeringFull = desiredDirection - Vector3.Normalize(this.old_velocity);
-            Vector3 steeringLimited = Vector3.ClampMagnitude(steeringFull, steeringForce);
-
-            Vector3 velocity = defaultSpeed * (Vector3.Normalize(Vector3.Normalize(this.old_velocity) + steeringLimited));
-            this.old_velocity = velocity;
-            this.transform.rotation = Quaternion.LookRotation(velocity);
-            enemyMover.Move(velocity);
-        }
-
-        return enemyState.movingState;
-    }
-
-    private Vector3 FindNewPositionInTether()
-    {
-        return tether.transform.position + (Vector3)Random.insideUnitCircle * tetherRadius;
-    }
-
-    private bool playerTooClose
-    {
-        get
-        {
-            return (Vector3.Distance(player.transform.position, this.transform.position) < runAwayDistance);
+            return enemyState.attackingState;
         }
     }
 
-    private GameObject findBestTether()
+    private enemyState ReturnUp()
     {
-        //4 data points to weigh
-        //Sight Ratio (visibility)
-        //Distance from player - probably want around 60 units of distance
-        //Distance from tether
-        //Current occupants of tether
-
-        TetherController[] tethers = tetherTracker.Tethers;
-        int[] weights = new int[tethers.Length];
-        int minWeightIndex = -1;
-        int minWeight = int.MaxValue;
-
-        for (int i = 0; i < tethers.Length; i++)
+        hitPlayer = false;
+        if (this.old_velocity.normalized.y > 0.99)
         {
-            weights[i] += 10 * tethers[i].Occupants ^ 2;
-            //weight distance from tether to AI as distance/4
-            int distanceToTether = (int)(Vector3.Distance(tethers[i].gameObject.transform.position, gameObject.transform.position) / 4);
-            weights[i] += distanceToTether;
+            Debug.Log("Finished Return");
+            return enemyState.preparingState;
+        }
+        moveWithSteering(Vector3.up, steeringMaxReturning);
+        return enemyState.returningState;
+    }
 
-            //We want distance from tether to player to be 60, so weight the difference of actual distance from that by difference*2
-            weights[i] += (int)(Mathf.Abs(
-                Vector3.Distance(tethers[i].gameObject.transform.position, player.transform.position) - 60)) * 2;
+    private enemyState Dodge()
+    {
+        Vector3 currentDirection = Vector3.Normalize(this.old_velocity);
+        Vector3 idealDirection = Vector3.zero;
+        float idealDistance = 0;
 
-            //Weight trace ratio at Ratio*50. Perfect visibility weights 50, no visibility weights 0;
-            weights[i] += (int)((tethers[i].TraceRatio) * 50);
+        //Note this generation of options should probably be changed
+        List<Vector3> possibleDirections = new List<Vector3>();
+        possibleDirections.Add(Vector3.forward);
+        possibleDirections.Add(Vector3.back);
+        possibleDirections.Add(Vector3.left);
+        possibleDirections.Add(Vector3.right);
+        possibleDirections.Add(Vector3.up);
+        possibleDirections.Add(Vector3.down);
 
-            if (weights[i] < minWeight)
+        RaycastHit hit;
+        foreach (Vector3 option in possibleDirections)
+        {
+            Physics.Raycast(this.transform.position, option, out hit, Mathf.Infinity, LayerMask.GetMask("Default"));
+            if (hit.distance > idealDistance)
             {
-                minWeightIndex = i;
-                minWeight = weights[i];              
+                idealDistance = hit.distance;
+                idealDirection = option;
             }
         }
+        moveWithSteering(idealDirection, steeringMaxDodging);
 
-        if (tether != null)
-        {
-            tether.GetComponent<TetherController>().incrementOccupantsBy(-1);
-        }
-        tethers[minWeightIndex].incrementOccupantsBy(1);
-
-        return tethers[minWeightIndex].gameObject;
+        //NOT IMPLEMENTED YET
+        return enemyState.wanderingState;
     }
 
     public override void Die()
     {
         playerCamera.gameObject.GetComponent<ScoreTracker>().ChangeScore(scoreValue, transform.position);
-
-        //foreach (GameObject ball in energyBalls)
-        //{
-        //    ball.GetComponent<EnergyBallProjectileController>().Die();
-        //}
-        //Destroy(this.gameObject);
         DestroyThis(); // Tells the spawnmanager to delete
     }
+    protected override void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        float impact = -Vector3.Dot(hit.normal, old_velocity);
 
-    // might want to consider refactoring CylinderEnemyController and CowardlyWizardEnemyController into a parent class
-    // since I'm duplicating a lot of the cylinder behavior
-
-    // should make it unable to spawn projectile if too close to player
-    // should never choose a tether past the player
+        if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            hit.gameObject.GetComponent<EnemyController>().takeDamage(old_velocity);
+            hit.gameObject.GetComponent<ImpactReceiver>().AddImpact(old_velocity, impact);
+        }
+        if (hit.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            hit.gameObject.GetComponent<PlayerHealth>().TakeDamage(1, old_velocity, impact);
+            hitPlayer = true;
+        }
+    }
 }

@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 3293244435944367792}
   - component: {fileID: 3293244435944367799}
   - component: {fileID: 3293244435944367798}
-  - component: {fileID: 3293244435944367797}
   - component: {fileID: 3293244435944367796}
   - component: {fileID: 3293244435944367803}
   - component: {fileID: 2530990253073880163}
   - component: {fileID: 2095499346261525587}
   - component: {fileID: 3375916080135372702}
+  - component: {fileID: 1361340019472603886}
   m_Layer: 9
   m_Name: Birdie
   m_TagString: Enemy
@@ -83,19 +83,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &3293244435944367797
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3293244435944367802}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3293244435944367796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,4 +183,18 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &1361340019472603886
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3293244435944367802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
