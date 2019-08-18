@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class CylinderMoveToTetherNode : BehaviorNode
 {
-    public CylinderMoveToTetherNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
+    new CylinderContext context;
+
+    public CylinderMoveToTetherNode(BehaviorNode[] nodeChildren, CylinderContext nodeContext) : base(nodeChildren, nodeContext)
     {
         children = nodeChildren;
+        context = nodeContext;
     }
 
     public override void Update()
@@ -16,6 +19,18 @@ public class CylinderMoveToTetherNode : BehaviorNode
 
     public override statusValues FixedUpdate()
     {
+
         return base.FixedUpdate();
+    }
+
+    private void MoveToTether()
+    {
+        context.Nav.SetDestination(context.Destination);
+    }
+
+    //TODO update this behavior to be less naive
+    private void TetheredBehavior()
+    {
+        context.Nav.SetDestination(context.Tether.transform.position + (Vector3)Random.insideUnitCircle * context.TetherRadius);
     }
 }

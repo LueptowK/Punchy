@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CylinderCheckDangerNode : BehaviorNode
 {
-    public CylinderCheckDangerNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
+    new CylinderContext context;
+
+    public CylinderCheckDangerNode(BehaviorNode[] nodeChildren, CylinderContext nodeContext) : base(nodeChildren, nodeContext)
     {
         children = nodeChildren;
         context = nodeContext;
@@ -17,6 +19,10 @@ public class CylinderCheckDangerNode : BehaviorNode
 
     public override statusValues FixedUpdate()
     {
-        return base.FixedUpdate();
+        if (Vector3.Distance(context.Player.transform.position, context.Transform.position) < context.RunAwayDistance)
+        {
+            context.Tether = null;
+        }
+        return statusValues.failure;
     }
 }

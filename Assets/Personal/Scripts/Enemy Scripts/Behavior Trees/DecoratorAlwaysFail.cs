@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DecoratorAlwaysFail : BehaviorNode
 {
-    public DecoratorAlwaysFail(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
+    public DecoratorAlwaysFail(BehaviorNode[] nodeChildren, TreeContextObject nodeContext) : base(nodeChildren, nodeContext)
     {
         children = nodeChildren;
         context = nodeContext;
@@ -17,6 +17,7 @@ public class DecoratorAlwaysFail : BehaviorNode
 
     public override statusValues FixedUpdate()
     {
+        base.Update();
         return statusValues.failure;
     }
 }

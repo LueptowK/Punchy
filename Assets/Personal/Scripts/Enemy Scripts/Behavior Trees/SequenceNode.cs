@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SequenceNode : BehaviorNode
 {
-    public SequenceNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
+    public SequenceNode(BehaviorNode[] nodeChildren, TreeContextObject nodeContext) : base(nodeChildren, nodeContext)
     {
         children = nodeChildren;
         context = nodeContext;

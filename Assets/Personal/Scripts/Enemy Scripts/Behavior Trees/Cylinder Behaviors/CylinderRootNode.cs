@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CylinderRootNode : BehaviorNode
 {
-    public CylinderRootNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
+    public CylinderRootNode(BehaviorNode[] nodeChildren, CylinderContext nodeContext) : base(nodeChildren, nodeContext)
     {
         context = nodeContext;
-        context.Add("root", new ContextItem<BehaviorNode>(this));
+        context.Root = this;
 
         
         BehaviorNode attackSelector = new CylinderAttackSelectorNode(
@@ -26,11 +26,7 @@ public class CylinderRootNode : BehaviorNode
                         new CylinderEscapeNode(null, nodeContext)
                     },
                     nodeContext),
-                    new CylinderCheckTetherNullNode(new BehaviorNode[]
-                    {
-                        new CylinderFindTetherNode(null, nodeContext)
-                    },
-                    nodeContext),
+                    new CylinderCheckReevaluateTether(null, nodeContext),
                     new DecoratorAlwaysFail(new BehaviorNode[]
                     {
                         new CylinderMoveToTetherNode(null, nodeContext)

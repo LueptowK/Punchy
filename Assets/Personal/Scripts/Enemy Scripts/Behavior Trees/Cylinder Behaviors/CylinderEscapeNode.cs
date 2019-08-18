@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CylinderEscapeNode : BehaviorNode
 {
-    public CylinderEscapeNode(BehaviorNode[] nodeChildren, Dictionary<string, object> nodeContext) : base(nodeChildren, nodeContext)
+    public CylinderEscapeNode(BehaviorNode[] nodeChildren, CylinderContext nodeContext) : base(nodeChildren, nodeContext)
     {
         children = nodeChildren;
         context = nodeContext;
