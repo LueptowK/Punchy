@@ -76,10 +76,11 @@ MonoBehaviour:
     attackTypeCooldowns:
     - 5
   spawnDifficultyValues:
-    baseSpawnLimits: 04000000010000000100000001000000
+    baseSpawnLimits: 0400000001000000010000000100000001000000
     spawnLimitsGrowth:
     - 1
     - 0.25
     - 0.5
     - 0.2
+    - 0.3
   isDefaultValues: 0
