@@ -3151,66 +3151,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[3].initialTokensPerAttackType.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[3].tokenGrowthPerAttackType.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[3].attackTypeCooldowns.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[4].initialTokensPerAttackType.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[4].tokenGrowthPerAttackType.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[4].attackTypeCooldowns.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[3].enemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[3].initialTokensPerAttackType.Array.data[0]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[3].attackTypeCooldowns.Array.data[0]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[3].tokenGrowthPerAttackType.Array.data[0]
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[4].enemyType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[4].initialTokensPerAttackType.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[4].tokenGrowthPerAttackType.Array.data[0]
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 744898452, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
-      propertyPath: enemyTypes.Array.data[4].attackTypeCooldowns.Array.data[0]
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 744898441, guid: 24702d2c502ac224ca4a638da8a5acdc, type: 3}
       propertyPath: tokenPool
       value: 
@@ -4591,12 +4531,12 @@ MonoBehaviour:
   spawnManager: {fileID: 297547915}
   playerCamera: {fileID: 297547910}
   steeringMaxWandering: 0.1
-  steeringMaxPreparing: 0.2
-  steeringMaxDiving: 0.2
+  steeringMaxPreparing: 0.15
+  steeringMaxDiving: 0.15
   steeringMaxAttacking: 0.03
   steeringMaxReturning: 0.03
-  steeringMaxDodging: 0.1
-  dodgeDistance: 5
+  steeringMaxDodging: 0.15
+  dodgeDistance: 7
   defaultSpeed: 0.3
   scoreValue: 10
 --- !u!1 &447270144
@@ -7692,6 +7632,11 @@ PrefabInstance:
       propertyPath: nav
       value: 
       objectReference: {fileID: 445113672}
+    - target: {fileID: 1361340019472603886, guid: 8436f8034090cfe4ebe50e8652830817,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3293244435944367796, guid: 8436f8034090cfe4ebe50e8652830817, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8436f8034090cfe4ebe50e8652830817, type: 3}
@@ -21419,11 +21364,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761339697076023599, guid: 137d5cac96d69e04abc091b1bfceeda9,
-        type: 3}
-      propertyPath: spawnDifficultyValues.baseSpawnLimits.Array.data[4]
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 137d5cac96d69e04abc091b1bfceeda9, type: 3}
