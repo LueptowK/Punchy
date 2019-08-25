@@ -9,8 +9,8 @@ public class BirdieEnemyController : EnemyController
     private enum enemyState { wanderingState, preparingState, divingState, attackingState, returningState, dodgingState};
     private enemyState state;
     private bool hitPlayer;
-    Vector3 destination;
     EnemyAttackTokenPool.Token token;
+    Vector3 escapeRoute;
     [SerializeField] float steeringMaxWandering;
     [SerializeField] float steeringMaxPreparing;
     [SerializeField] float steeringMaxDiving;
@@ -21,7 +21,6 @@ public class BirdieEnemyController : EnemyController
     [SerializeField] float defaultSpeed;
     [SerializeField] int scoreValue;
     private float stateTimer;
-    private float reevaluateTetherTime;
     bool dead;
     NavMeshHit closestHit;
 
@@ -39,7 +38,8 @@ public class BirdieEnemyController : EnemyController
         state = enemyState.wanderingState;
         dead = false;
         stateTimer = 0f;
-        reevaluateTetherTime = 0f;
+        escapeRoute = Vector3.forward;
+        old_velocity = Vector3.up;
     }
 
     // Update is called once per frame
@@ -54,7 +54,6 @@ public class BirdieEnemyController : EnemyController
                 Physics.Raycast(this.transform.position, this.old_velocity, out hit, Mathf.Infinity, LayerMask.GetMask("Default"));
                 if (hit.distance < dodgeDistance)
                 {
-                    Debug.Log("Dodging " + stateTimer);
                     state = enemyState.dodgingState;
                 }
             }
@@ -95,18 +94,16 @@ public class BirdieEnemyController : EnemyController
         this.transform.rotation = Quaternion.LookRotation(velocity);
         enemyMover.Move(velocity);
     }
-    
+
     private enemyState Wander()
     {
-        //moveWithSteering(this.old_velocity, steeringMaxWandering);
-        token = enemyAttackTokenPool.RequestToken(this.gameObject, 0);
-        if (token != null)
+        if (TryAttack(0))
         {
             return enemyState.preparingState;
         }
         else
         {
-            Dodge();
+            moveWithSteering(this.old_velocity, steeringMaxWandering);
             return enemyState.wanderingState;
         }
     }
@@ -180,31 +177,28 @@ public class BirdieEnemyController : EnemyController
         }
 
         Vector3 currentDirection = Vector3.Normalize(this.old_velocity);
-        Vector3 idealDirection = Vector3.zero;
+        Vector3 idealDirection = escapeRoute;
         float idealDistance = 0;
 
-        //Note this generation of options should probably be changed
-        List<Vector3> possibleDirections = new List<Vector3>();
-        possibleDirections.Add(Vector3.forward);
-        possibleDirections.Add(Vector3.back);
-        possibleDirections.Add(Vector3.left);
-        possibleDirections.Add(Vector3.right);
-        possibleDirections.Add(Vector3.up);
-        possibleDirections.Add(Vector3.down);
-
         RaycastHit hit;
-        foreach (Vector3 option in possibleDirections)
+        Physics.Raycast(this.transform.position, this.escapeRoute, out hit, Mathf.Infinity, LayerMask.GetMask("Default"));
+        if (hit.distance < dodgeDistance)
         {
-            Physics.Raycast(this.transform.position, option, out hit, Mathf.Infinity, LayerMask.GetMask("Default"));
-            if (hit.distance > idealDistance)
+            List<Vector3> possibleDirections = GetEightNormals(this.old_velocity);
+            RaycastHit newhit;
+            foreach (Vector3 option in possibleDirections)
             {
-                idealDistance = hit.distance;
-                idealDirection = option;
+                Physics.Raycast(this.transform.position, option, out newhit, Mathf.Infinity, LayerMask.GetMask("Default"));
+                if (hit.distance > idealDistance)
+                {
+                    idealDistance = newhit.distance;
+                    idealDirection = option;
+                }
             }
         }
+        escapeRoute = idealDirection;
         moveWithSteering(idealDirection, steeringMaxDodging);
 
-        //NOT IMPLEMENTED YET
         return enemyState.wanderingState;
     }
     private bool TryAttack(int attackType)
@@ -246,6 +240,23 @@ public class BirdieEnemyController : EnemyController
             }
         }
     }
+
+    private List<Vector3> GetEightNormals (Vector3 direction)
+    {
+        direction = Vector3.Normalize(direction);
+        List<Vector3> normals = new List<Vector3>();
+        Vector3 xCross = Vector3.Cross(direction, Vector3.right);
+        Vector3 yCross = Vector3.Cross(direction, Vector3.up);
+        Vector3 zCross = Vector3.Cross(direction, Vector3.forward);
+
+        for (int i=0; i < 8; i++)
+        {
+            Vector3 normal = Vector3.zero;
+            if (i % 2 < 1) { normal += xCross; } else { normal -= xCross; }
+            if (i % 4 < 2) { normal += yCross; } else { normal -= yCross; }
+            if (i % 8 < 4) { normal += zCross; } else { normal -= zCross; }
+            normals.Add(normal);
         }
+        return normals;
     }
 }
