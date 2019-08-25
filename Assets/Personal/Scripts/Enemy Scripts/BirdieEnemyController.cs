@@ -143,18 +143,19 @@ public class BirdieEnemyController : EnemyController
         if(Vector3.Dot(birdieToTarget,this.old_velocity)<0)
         {
             Debug.Log("Returning");
-            enemyAttackTokenPool.ReturnToken(this.type, token);
+            EndAttack();
             return enemyState.returningState;
         }
-
-        moveWithSteering(birdieToTarget, steeringMaxAttacking);
-        if (hitPlayer)
+        else if (hitPlayer)
         {
-            enemyAttackTokenPool.ReturnToken(this.type, token);
+            hitPlayer = false;
+            state = enemyState.returningState;
+            EndAttack();
             return enemyState.returningState;
         }
         else
         {
+            moveWithSteering(birdieToTarget, steeringMaxAttacking);
             return enemyState.attackingState;
         }
     }
@@ -165,7 +166,7 @@ public class BirdieEnemyController : EnemyController
         if (this.old_velocity.normalized.y > 0.99)
         {
             Debug.Log("Finished Return");
-            return enemyState.preparingState;
+            return enemyState.wanderingState;
         }
         moveWithSteering(Vector3.up, steeringMaxReturning);
         return enemyState.returningState;
@@ -173,6 +174,11 @@ public class BirdieEnemyController : EnemyController
 
     private enemyState Dodge()
     {
+        if (this.token != null)
+        {
+            EndAttack();
+        }
+
         Vector3 currentDirection = Vector3.Normalize(this.old_velocity);
         Vector3 idealDirection = Vector3.zero;
         float idealDistance = 0;
@@ -201,9 +207,24 @@ public class BirdieEnemyController : EnemyController
         //NOT IMPLEMENTED YET
         return enemyState.wanderingState;
     }
+    private bool TryAttack(int attackType)
+    {
+        token = enemyAttackTokenPool.RequestToken(this.gameObject, attackType);
+        return (token != null);
+    }
+    private void EndAttack()
+    {
+        material.color = defaultColor;
+        enemyAttackTokenPool.ReturnToken(this.type, token);
+        token = null;
+    }
 
     public override void Die()
     {
+        if (this.token != null)
+        {
+            EndAttack();
+        }
         playerCamera.gameObject.GetComponent<ScoreTracker>().ChangeScore(scoreValue, transform.position);
         DestroyThis(); // Tells the spawnmanager to delete
     }
@@ -219,7 +240,12 @@ public class BirdieEnemyController : EnemyController
         if (hit.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             hit.gameObject.GetComponent<PlayerHealth>().TakeDamage(1, old_velocity, impact);
-            hitPlayer = true;
+            if (state == enemyState.attackingState)
+            {
+                hitPlayer = true;
+            }
+        }
+    }
         }
     }
 }

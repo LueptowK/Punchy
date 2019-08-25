@@ -656,12 +656,18 @@ MonoBehaviour:
     - 0
     attackTypeCooldowns:
     - 0.02
-  - enemyType: 2
+  - enemyType: 3
     initialTokensPerAttackType: 01000000
     tokenGrowthPerAttackType:
-    - 0
+    - 0.3
     attackTypeCooldowns:
-    - 0.02
+    - 1000
+  - enemyType: 4
+    initialTokensPerAttackType: 01000000
+    tokenGrowthPerAttackType:
+    - 0.1
+    attackTypeCooldowns:
+    - 10000
 --- !u!114 &1439987890184473724
 MonoBehaviour:
   m_ObjectHideFlags: 0
