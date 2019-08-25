@@ -20,6 +20,12 @@ public class BirdieEnemyController : EnemyController
     [SerializeField] float dodgeDistance;
     [SerializeField] float defaultSpeed;
     [SerializeField] int scoreValue;
+
+    Color defaultColor;
+    Color fireColor = Color.magenta;
+    Material material;
+    MeshRenderer cachedRenderer;
+
     private float stateTimer;
     bool dead;
     NavMeshHit closestHit;
@@ -30,7 +36,9 @@ public class BirdieEnemyController : EnemyController
     protected override void Start()
     {
         base.Start();
-
+        cachedRenderer = gameObject.GetComponent<MeshRenderer>();
+        material = cachedRenderer.material;
+        defaultColor = material.color;
         nav = GetComponent<NavMeshAgent>();
         nav.enabled = false;
         enemyAttackTokenPool = player.GetComponentInChildren<EnemyAttackTokenPool>();
@@ -127,6 +135,7 @@ public class BirdieEnemyController : EnemyController
         if (this.old_velocity.normalized.y < -0.99)
         {
             Debug.Log("Finished dive");
+            material.color = fireColor;
             return enemyState.attackingState;
         }
         moveWithSteering(Vector3.down, steeringMaxDiving);
