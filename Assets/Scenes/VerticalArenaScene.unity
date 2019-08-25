@@ -4536,7 +4536,7 @@ MonoBehaviour:
   steeringMaxAttacking: 0.03
   steeringMaxReturning: 0.03
   steeringMaxDodging: 0.15
-  dodgeDistance: 7
+  dodgeDistance: 5
   defaultSpeed: 0.3
   scoreValue: 10
 --- !u!1 &447270144
