@@ -21,6 +21,8 @@ public class BirdieEnemyController : EnemyController
     [SerializeField] float defaultSpeed;
     [SerializeField] int scoreValue;
     [SerializeField] AudioClip attackingSound;
+    [SerializeField] GameObject fractures;
+    [SerializeField] ParticleSystem explosion;
     Color defaultColor;
     Color fireColor = Color.magenta;
     Material material;
@@ -224,7 +226,24 @@ public class BirdieEnemyController : EnemyController
         enemyAttackTokenPool.ReturnToken(this.type, token);
         token = null;
     }
-
+    public override void takeDamage(Vector3 direction)
+    {
+        if (this.token != null)
+        {
+            EndAttack();
+        }
+        playerCamera.gameObject.GetComponent<ScoreTracker>().ChangeScore(scoreValue, transform.position);
+        GameObject fractureInstance = Instantiate(fractures, transform.position, transform.rotation);
+        fractureInstance.GetComponent<AudioSpeedByTime>().AssignTimeScaleManager(player.GetComponentInChildren<TimeScaleManager>());
+        Rigidbody[] fractureCells = fractureInstance.GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody cell in fractureCells)
+        {
+            cell.velocity = old_velocity.magnitude * direction;
+        }
+        Instantiate(explosion, transform.position, transform.rotation);
+        explosion.Play();
+        DestroyThis(); // Tells the spawnmanager to delete
+    }
     public override void Die()
     {
         if (this.token != null)
@@ -232,6 +251,15 @@ public class BirdieEnemyController : EnemyController
             EndAttack();
         }
         playerCamera.gameObject.GetComponent<ScoreTracker>().ChangeScore(scoreValue, transform.position);
+        GameObject fractureInstance = Instantiate(fractures, transform.position, transform.rotation);
+        fractureInstance.GetComponent<AudioSpeedByTime>().AssignTimeScaleManager(player.GetComponentInChildren<TimeScaleManager>());
+        Rigidbody[] fractureCells = fractureInstance.GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody cell in fractureCells)
+        {
+            cell.velocity = old_velocity;
+        }
+        Instantiate(explosion, transform.position, transform.rotation);
+        explosion.Play();
         DestroyThis(); // Tells the spawnmanager to delete
     }
     protected override void OnControllerColliderHit(ControllerColliderHit hit)
