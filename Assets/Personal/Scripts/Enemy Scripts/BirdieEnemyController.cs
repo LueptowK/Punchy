@@ -20,12 +20,13 @@ public class BirdieEnemyController : EnemyController
     [SerializeField] float dodgeDistance;
     [SerializeField] float defaultSpeed;
     [SerializeField] int scoreValue;
-
+    [SerializeField] AudioClip attackingSound;
     Color defaultColor;
     Color fireColor = Color.magenta;
     Material material;
     MeshRenderer cachedRenderer;
 
+    AudioSource audioSource;
     private float stateTimer;
     bool dead;
     NavMeshHit closestHit;
@@ -36,6 +37,7 @@ public class BirdieEnemyController : EnemyController
     protected override void Start()
     {
         base.Start();
+        audioSource = gameObject.GetComponent<AudioSource>();
         cachedRenderer = gameObject.GetComponent<MeshRenderer>();
         material = cachedRenderer.material;
         defaultColor = material.color;
@@ -136,6 +138,7 @@ public class BirdieEnemyController : EnemyController
         {
             Debug.Log("Finished dive");
             material.color = fireColor;
+            audioSource.PlayOneShot(attackingSound);
             return enemyState.attackingState;
         }
         moveWithSteering(Vector3.down, steeringMaxDiving);
