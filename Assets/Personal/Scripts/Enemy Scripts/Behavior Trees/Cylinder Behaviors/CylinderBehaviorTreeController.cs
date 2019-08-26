@@ -9,8 +9,8 @@ public class CylinderBehaviorTreeController : EnemyController
     // Start is called before the first frame update
     protected override void Start()
     {
-        Dictionary<string, object> treeContext = new Dictionary<string, object>();
-        treeContext.Add("mover", this);
+        CylinderContext treeContext = new CylinderContext();
+        treeContext.Actor = this.gameObject;
 
         root = new CylinderRootNode(null, treeContext);
         currentNode = root;
@@ -19,11 +19,11 @@ public class CylinderBehaviorTreeController : EnemyController
     // Update is called once per frame
     protected override void Update()
     {
-        base.Update();
+        root.Update();
     }
 
     protected override void FixedUpdate()
     {
-        base.FixedUpdate();
+        root.FixedUpdate();
     }
 }
