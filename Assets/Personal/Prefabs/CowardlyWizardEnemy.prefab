@@ -117,11 +117,12 @@ MonoBehaviour:
   firingFrequencyRange: 5
   fireWindupTime: 0
   scoreValue: 20
+  bulletDamage: 0.05
+  maxNumberOfEnergyBalls: 4
+  bulletSpeed: 3
   energyBallPrefab: {fileID: 6549469861394236073, guid: 73fc79d91c5460c449cc3ecd871d0876,
     type: 3}
-  bulletSpeed: 3
-  bulletDamage: 0.05
-  energyBallDuration: 40
+  energyBallsParent: {fileID: 0}
 --- !u!195 &3293244435944367803
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -173,10 +174,11 @@ MonoBehaviour:
     groundFriction: 5
     airFriction: 0.25
     recoveryImpact: 1
+    bounceRatio: 0
   generalValues:
     healthValue: 1
-    impactToKill: 10
-    knockbackModifier: 20
+    impactToDamage: 1000
+    knockbackModifier: 1
 --- !u!143 &3375916080135372702
 CharacterController:
   m_ObjectHideFlags: 0
