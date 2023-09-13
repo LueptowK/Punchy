@@ -1,4 +1,5 @@
-Test level footage as of early December: https://youtu.be/gNj2SkE29tU
+Test level footage as of early December 2018: https://youtu.be/gNj2SkE29tU
+Test footage from June 2019: https://youtu.be/_uWwX8D7_DQ
 
 This project uses Unity version 2018.3.7f1
 
